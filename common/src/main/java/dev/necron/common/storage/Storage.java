@@ -10,6 +10,11 @@ public interface Storage {
     void init();
 
     /**
+     * shutdown the storage
+     */
+    void shutdown();
+
+    /**
      * load TokenPlayer from storage
      */
     TokenPlayer loadPlayer(String name);

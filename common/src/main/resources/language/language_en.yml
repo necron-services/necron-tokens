@@ -4,6 +4,9 @@ language:
 
   no-perm: "%prefix% &cYou don't have permission to use this command."
   no-player: "%prefix% &cYou must be a player to use this command."
+  player-not-found: "%prefix% &cPlayer not found."
+
+  reloaded: "%prefix% &aSuccessfully reloaded."
 
   help-message:
     - ""

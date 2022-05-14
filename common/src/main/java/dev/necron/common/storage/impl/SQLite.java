@@ -4,8 +4,14 @@ import dev.necron.common.storage.Storage;
 import dev.necron.common.token.TokenPlayer;
 
 public class SQLite implements Storage {
+
     @Override
     public void init() {
+
+    }
+
+    @Override
+    public void shutdown() {
 
     }
 

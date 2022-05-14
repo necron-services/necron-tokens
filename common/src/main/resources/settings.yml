@@ -6,8 +6,8 @@ settings:
 
   storage:
     #MONGODB - SQLITE
-    type: "MONGODB"
-    mongo:
+    type: "SQLITE"
+    mongodb:
       url: "mongodb://localhost:27017"
       db: "test"
       collection: "test"

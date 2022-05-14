@@ -11,6 +11,11 @@ public class MongoDB implements Storage {
     }
 
     @Override
+    public void shutdown() {
+
+    }
+
+    @Override
     public TokenPlayer loadPlayer(String name) {
         return null;
     }
