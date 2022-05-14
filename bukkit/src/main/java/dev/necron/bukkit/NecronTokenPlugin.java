@@ -1,5 +1,11 @@
 package dev.necron.bukkit;
 
+import co.aikar.commands.BukkitCommandManager;
+import dev.necron.bukkit.command.TokenCommand;
+import dev.necron.bukkit.listener.BlockListener;
+import dev.necron.bukkit.listener.EntityListener;
+import dev.necron.bukkit.listener.PlayerListener;
+import dev.necron.bukkit.listener.adapter.BukkitListenerAdapter;
 import dev.necron.common.NecronToken;
 import dev.necron.common.config.Config;
 import dev.necron.common.config.ConfigKeys;
@@ -8,7 +14,6 @@ import dev.necron.common.config.ConfigType;
 import dev.necron.common.token.TokenManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public final class NecronTokenPlugin extends JavaPlugin implements NecronToken {
 
@@ -29,10 +34,19 @@ public final class NecronTokenPlugin extends JavaPlugin implements NecronToken {
         reloadConfigs();
         tokenManager = new TokenManager();
 
+        BukkitCommandManager commandManager = new BukkitCommandManager(this);
+        commandManager.registerCommand(new TokenCommand());
+
+        BukkitListenerAdapter.register(this,
+                PlayerListener.class,
+                BlockListener.class,
+                EntityListener.class);
+
     }
 
     @Override
     public void onDisable() {
+
     }
 
     public void reloadConfigs() {
