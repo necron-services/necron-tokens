@@ -1,0 +1,11 @@
+language:
+
+  prefix: "&6NecronToken &8➜"
+
+  no-perm: "%prefix% &cYou don't have permission to use this command."
+  no-player: "%prefix% &cYou must be a player to use this command."
+
+  help-message:
+    - ""
+    - ""
+    - ""
