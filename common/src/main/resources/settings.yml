@@ -2,6 +2,8 @@ settings:
 
   language: "en"
 
+  admin-perm: "token.admin"
+
   storage:
     #MONGODB - SQLITE
     type: "MONGODB"
