@@ -13,7 +13,7 @@ dependencies {
     implementation "co.aikar:acf-bukkit:0.5.1-SNAPSHOT"
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 1.8
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -32,11 +32,13 @@ processResources {
     }
 }
 
-shadowJar {
-    archiveFileName = 'NecronToken.jar'
-    minimize()
+artifacts.archives(tasks.shadowJar)
+
+tasks.jar {
+    enabled = false
 }
 
-artifacts {
-    archives shadowJar
+tasks.shadowJar {
+    minimize()
+    archiveFileName.set('NecronToken.jar')
 }
