@@ -1,5 +1,5 @@
 name: NecronToken
-version: 1.0.0
+version: 0.0.1
 main: dev.necron.bukkit.NecronTokenPlugin
 api-version: 1.13
 authors: [ Kafein ]

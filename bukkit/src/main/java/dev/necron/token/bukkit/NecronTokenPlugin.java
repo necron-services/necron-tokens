@@ -6,12 +6,12 @@ import dev.necron.token.bukkit.listener.BlockListener;
 import dev.necron.token.bukkit.listener.EntityListener;
 import dev.necron.token.bukkit.listener.PlayerListener;
 import dev.necron.token.bukkit.listener.adapter.BukkitListenerAdapter;
-import dev.necron.token.common.NecronToken;
-import dev.necron.token.common.config.Config;
-import dev.necron.token.common.config.ConfigKeys;
-import dev.necron.token.common.config.ConfigManager;
-import dev.necron.token.common.config.ConfigType;
-import dev.necron.token.common.token.TokenManager;
+import dev.necron.token.api.NecronToken;
+import dev.necron.token.api.config.Config;
+import dev.necron.token.api.config.ConfigKeys;
+import dev.necron.token.api.config.ConfigManager;
+import dev.necron.token.api.config.ConfigType;
+import dev.necron.token.api.token.TokenManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 

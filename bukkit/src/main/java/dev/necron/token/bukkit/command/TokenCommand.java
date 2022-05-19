@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import dev.necron.token.bukkit.NecronTokenPlugin;
 import dev.necron.token.bukkit.util.LanguageUtil;
-import dev.necron.token.common.config.ConfigKeys;
+import dev.necron.token.api.config.ConfigKeys;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

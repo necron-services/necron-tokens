@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 allprojects {
-    group 'com.hakan'
+    group 'dev.necron'
     version '0.0.1'
     sourceCompatibility = 1.8
     compileJava.options.encoding = 'UTF-8'
@@ -11,6 +12,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'com.github.johnrengelman.shadow'
 
     repositories {
         mavenCentral()
