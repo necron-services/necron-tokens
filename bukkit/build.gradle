@@ -1,6 +1,6 @@
 repositories {
-    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
@@ -11,22 +11,27 @@ dependencies {
 }
 
 shadowJar {
-    minimize()
-    archiveFileName.set('NecronToken.jar')
-
     relocate 'co.aikar', 'dev.necron.token.libraries.co.aikar'
     relocate 'com.google', 'dev.necron.token.libraries.com.google'
-    relocate 'javax.annotation', 'dev.necron.token.libraries.javax.annotation'
-    relocate 'javax.inject', 'dev.necron.token.libraries.javax.inject'
     relocate 'ninja.leaping', 'dev.necron.token.libraries.ninja.leaping'
-    relocate 'org.aopalliance', 'dev.necron.token.libraries.org.aopalliance'
-    relocate 'org.checkerframework', 'dev.necron.token.libraries.org.checkerframework'
-    relocate 'org.codehause', 'dev.necron.token.libraries.org.codehause'
+
+    relocate 'javax.inject', 'dev.necron.token.libraries.javax.inject'
+    relocate 'javax.annotation', 'dev.necron.token.libraries.javax.annotation'
+
     relocate 'org.yaml', 'dev.necron.token.libraries.org.yaml'
+    relocate 'org.aopalliance', 'dev.necron.token.libraries.org.aopalliance'
+    relocate 'org.codehaus.mojo', 'dev.necron.token.libraries.org.codehaus.mojo'
+    relocate 'org.checkerframework', 'dev.necron.token.libraries.org.checkerframework'
+
+    minimize()
 }
 
-artifacts.archives(shadowJar)
+artifacts.archives(tasks.shadowJar)
 
 tasks.jar {
     enabled = false
+}
+
+tasks.shadowJar {
+    archiveFileName.set('NecronToken.jar')
 }
