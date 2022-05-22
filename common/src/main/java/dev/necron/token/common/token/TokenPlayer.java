@@ -1,4 +1,4 @@
-package dev.necron.token.api.token;
+package dev.necron.token.common.token;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

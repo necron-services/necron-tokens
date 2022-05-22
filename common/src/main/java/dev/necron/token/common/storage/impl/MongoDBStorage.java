@@ -1,9 +1,9 @@
-package dev.necron.token.api.storage.impl;
+package dev.necron.token.common.storage.impl;
 
-import dev.necron.token.api.storage.Storage;
-import dev.necron.token.api.token.TokenPlayer;
+import dev.necron.token.common.storage.Storage;
+import dev.necron.token.common.token.TokenPlayer;
 
-public class MongoDB implements Storage {
+public class MongoDBStorage implements Storage {
 
     @Override
     public void init() {

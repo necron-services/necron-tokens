@@ -1,6 +1,6 @@
-package dev.necron.token.api.storage;
+package dev.necron.token.common.storage;
 
-import dev.necron.token.api.token.TokenPlayer;
+import dev.necron.token.common.token.TokenPlayer;
 
 public interface Storage {
 

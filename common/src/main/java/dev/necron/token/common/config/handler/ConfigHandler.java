@@ -1,10 +1,12 @@
-package dev.necron.token.api.config;
+package dev.necron.token.common.config.handler;
 
-import dev.necron.token.api.config.node.NodeLoader;
+import dev.necron.token.common.config.Config;
+import dev.necron.token.common.config.key.ConfigKey;
+import dev.necron.token.common.config.ConfigType;
+import dev.necron.token.common.config.node.NodeLoader;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ninja.leaping.configurate.ConfigurationNode;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,15 +14,14 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Getter
 @SuppressWarnings({"unchecked"})
-public class ConfigManager {
+public class ConfigHandler {
 
-    private final NodeLoader loader = new NodeLoader();
-
-    private final Map<String, Config> configs = new HashMap<>();
+    private static final Map<String, Config> configs = new HashMap<>();
 
     /**
      * Put config's nodes into a class's fields
@@ -30,7 +31,7 @@ public class ConfigManager {
      * @param prefix prefix to put nodes into fields
      * @param <V>    type of the class
      */
-    public <V> void putNodesToClass(Config config, Class<?> clazz, boolean prefix) {
+    public static <V> void putNodesToClass(Config config, Class<?> clazz, boolean prefix) {
         try {
             for (Field field : clazz.getDeclaredFields()) {
                 ConfigKey<V> configKey = (ConfigKey<V>) field.get(null);
@@ -54,14 +55,14 @@ public class ConfigManager {
      * @param inputStream input stream of the config
      * @return config
      */
-    @Nullable
-    public Config createConfig(String name, String path, InputStream inputStream) {
+    public static Optional<Config> createConfig(String name, String path, InputStream inputStream) {
+        path = "plugins/NecronToken/" + path;
         try {
-            return new Config(name, path, loader.loadNode(path, inputStream));
+            return Optional.of(new Config(name, path, NodeLoader.loadNode(path, inputStream)));
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return Optional.empty();
     }
 
     /**
@@ -71,14 +72,14 @@ public class ConfigManager {
      * @param path path of the config
      * @return config
      */
-    @Nullable
-    public Config createConfig(String name, String path) {
+    public static Optional<Config> createConfig(String name, String path) {
+        path = "plugins/NecronToken/" + path;
         try {
-            return new Config(name, path, loader.loadNode(path));
+            return Optional.of(new Config(name, path, NodeLoader.loadNode(path)));
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return Optional.empty();
     }
 
     /**
@@ -87,9 +88,8 @@ public class ConfigManager {
      * @param name name of the config
      * @return config
      */
-    @Nullable
-    public Config getConfig(String name) {
-        return configs.get(name.toLowerCase(Locale.ROOT));
+    public static Optional<Config> find(String name) {
+        return Optional.ofNullable(configs.get(name.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -98,9 +98,8 @@ public class ConfigManager {
      * @param configType config type
      * @return config
      */
-    @Nullable
-    public Config getConfig(ConfigType configType) {
-        return configs.get(configType.name().toLowerCase(Locale.ROOT));
+    public static Optional<Config> find(ConfigType configType) {
+        return find(configType.name());
     }
 
     /**
@@ -109,7 +108,7 @@ public class ConfigManager {
      * @param name   name of the config
      * @param config config
      */
-    public void addConfig(String name, Config config) {
+    public static void put(String name, Config config) {
         configs.put(name.toLowerCase(Locale.ROOT), config);
     }
 
@@ -119,7 +118,7 @@ public class ConfigManager {
      * @param configType config type
      * @param config     config
      */
-    public void addConfig(ConfigType configType, Config config) {
+    public static void put(ConfigType configType, Config config) {
         configs.put(configType.name().toLowerCase(Locale.ROOT), config);
     }
 
@@ -128,37 +127,8 @@ public class ConfigManager {
      *
      * @param name name of the config
      */
-    public void removeConfig(String name) {
+    public static void remove(String name) {
         configs.remove(name.toLowerCase(Locale.ROOT));
-    }
-
-    /**
-     * Remove a config from the map
-     *
-     * @param configType config type
-     */
-    public void removeConfig(ConfigType configType) {
-        configs.remove(configType.name().toLowerCase(Locale.ROOT));
-    }
-
-    /**
-     * Contains a config
-     *
-     * @param name name of the config
-     * @return true if the config exists
-     */
-    public boolean containsConfig(String name) {
-        return configs.containsKey(name.toLowerCase(Locale.ROOT));
-    }
-
-    /**
-     * Contains a config
-     *
-     * @param configType config type
-     * @return true if the config exists
-     */
-    public boolean containsConfig(ConfigType configType) {
-        return configs.containsKey(configType.name().toLowerCase(Locale.ROOT));
     }
 
 }

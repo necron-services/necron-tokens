@@ -1,4 +1,4 @@
-package dev.necron.token.api.config.node;
+package dev.necron.token.common.config.node;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -20,7 +20,7 @@ public class NodeLoader {
      * @return the node
      * @throws IOException if the node is not found
      */
-    public ConfigurationNode loadNode(String path) throws IOException {
+    public static ConfigurationNode loadNode(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
@@ -43,7 +43,7 @@ public class NodeLoader {
      * @return the node
      * @throws IOException if the node is not found
      */
-    public ConfigurationNode loadNode(String path, InputStream inputStream) throws IOException {
+    public static ConfigurationNode loadNode(String path, InputStream inputStream) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
