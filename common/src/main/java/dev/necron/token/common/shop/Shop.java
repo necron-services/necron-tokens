@@ -1,6 +1,6 @@
-package dev.necron.token.api.shop;
+package dev.necron.token.common.shop;
 
-import dev.necron.token.api.shop.item.parent.ParentShopValue;
+import dev.necron.token.common.shop.item.ShopItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,7 +12,7 @@ public class Shop {
 
     private final String name;
     private final long shopRefreshTime;
-    private final ParentShopValue[] shopItems;
+    private final ShopItem[] shopItems;
 
     private long currentShopRefreshTime;
 

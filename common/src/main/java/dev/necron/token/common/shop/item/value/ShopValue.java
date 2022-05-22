@@ -1,4 +1,4 @@
-package dev.necron.token.api.shop.item;
+package dev.necron.token.common.shop.item.value;
 
 public interface ShopValue {
 
