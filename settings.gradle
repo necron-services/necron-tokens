@@ -1,3 +1,3 @@
 rootProject.name = 'necron-token'
-include 'api'
+include 'common'
 include 'bukkit'
