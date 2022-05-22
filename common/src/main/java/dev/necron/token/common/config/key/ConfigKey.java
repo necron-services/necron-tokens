@@ -1,5 +1,6 @@
-package dev.necron.token.api.config;
+package dev.necron.token.common.config.key;
 
+import dev.necron.token.common.config.ConfigType;
 import lombok.Getter;
 import lombok.Setter;
 

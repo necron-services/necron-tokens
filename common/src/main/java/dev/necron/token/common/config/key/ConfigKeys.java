@@ -1,6 +1,7 @@
-package dev.necron.token.api.config;
+package dev.necron.token.common.config.key;
 
 import com.google.common.collect.ImmutableList;
+import dev.necron.token.common.config.ConfigType;
 
 import java.util.List;
 

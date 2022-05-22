@@ -1,4 +1,4 @@
-package dev.necron.token.api.config.language;
+package dev.necron.token.common.config.language;
 
 import org.jetbrains.annotations.Nullable;
 

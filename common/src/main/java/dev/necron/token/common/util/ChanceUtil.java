@@ -1,4 +1,4 @@
-package dev.necron.token.api.util;
+package dev.necron.token.common.util;
 
 public class ChanceUtil {
 

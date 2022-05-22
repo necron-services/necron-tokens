@@ -1,5 +1,6 @@
-package dev.necron.token.api.config;
+package dev.necron.token.common.config;
 
+import dev.necron.token.common.config.key.ConfigKeys;
 import lombok.Getter;
 
 public enum ConfigType {
