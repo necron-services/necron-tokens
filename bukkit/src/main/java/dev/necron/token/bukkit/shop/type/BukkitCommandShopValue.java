@@ -4,6 +4,8 @@ import dev.necron.token.common.shop.item.value.type.CommandShopValue;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class BukkitCommandShopValue extends CommandShopValue {
 
     public BukkitCommandShopValue(String command) {
@@ -11,10 +13,10 @@ public class BukkitCommandShopValue extends CommandShopValue {
     }
 
     @Override
-    public <T> void execute(T player) {
-        if (!(player instanceof Player)) throw new IllegalArgumentException("Player must be a Bukkit Player");
-        Player p = (Player) player;
-        Bukkit.dispatchCommand(p, this.command.replace("%player%", p.getName()));
+    public void execute(UUID playerUUID) {
+        Player player = Bukkit.getPlayer(playerUUID);
+        if (player == null) return;
+        Bukkit.dispatchCommand(player, this.command.replace("%player%", player.getName()));
     }
 
 }

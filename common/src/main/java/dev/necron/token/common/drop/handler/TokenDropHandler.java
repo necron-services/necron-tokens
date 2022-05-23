@@ -7,6 +7,7 @@ import dev.necron.token.common.drop.loader.TokenDropLoader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 public class TokenDropHandler {
 
@@ -25,9 +26,9 @@ public class TokenDropHandler {
         }
     }
 
-    public static void execute(TokenDropType type, Object player, Object executableObject) {
+    public static void execute(TokenDropType type, UUID playerUUID, Object executableObject) {
         Optional.ofNullable(TokenDropHandler.drops.get(type)).ifPresent(drops -> {
-            for (TokenDrop drop : drops) drop.execute(player, executableObject);
+            for (TokenDrop drop : drops) drop.execute(playerUUID, executableObject);
         });
     }
 

@@ -1,13 +1,14 @@
 package dev.necron.token.common.shop.item.value;
 
+import java.util.UUID;
+
 public interface ShopValue {
 
     /**
      * execute the shop item to the player
      *
-     * @param player the player to execute the item to
-     * @param <T>    the type of player
+     * @param playerUUID the player uuid to execute the shop item
      */
-    <T> void execute(T player);
+    void execute(UUID playerUUID);
 
 }

@@ -5,7 +5,7 @@ settings:
   admin-perm: "token.admin"
 
   storage:
-    #MONGODB - SQLITE
+    #MONGODB - SQLITE - MYSQL - MARIA
     type: "SQLITE"
     mongodb:
       url: "mongodb://localhost:27017"

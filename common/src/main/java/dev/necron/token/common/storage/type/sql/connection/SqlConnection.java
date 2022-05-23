@@ -1,5 +1,7 @@
 package dev.necron.token.common.storage.type.sql.connection;
 
+import dev.necron.token.common.storage.type.sql.connection.credentials.SqlCredentials;
+
 import java.sql.Connection;
 
 public interface SqlConnection {
@@ -7,7 +9,7 @@ public interface SqlConnection {
     /**
      * connect to the sql database
      */
-    void init(String host, int port, String database, String username, String password);
+    void init(SqlCredentials credentials);
 
     /**
      * @return the initialized connection

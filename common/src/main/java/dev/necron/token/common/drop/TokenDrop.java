@@ -1,13 +1,15 @@
 package dev.necron.token.common.drop;
 
+import java.util.UUID;
+
 public interface TokenDrop {
 
     /**
      * Executes the drop.
-     * @param player The player who dropped the token.
+     * @param playerUUID The player who dropped the token.
      * @param <T> The type of player.
      */
-    <T, V> void execute(T player, V dropper);
+    <T, V> void execute(UUID playerUUID, V dropper);
 
     /**
      * Same as equals, but with a generic type.

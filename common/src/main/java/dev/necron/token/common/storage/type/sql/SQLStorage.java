@@ -4,6 +4,7 @@ import dev.necron.token.common.config.key.ConfigKeys;
 import dev.necron.token.common.storage.Storage;
 import dev.necron.token.common.storage.type.sql.connection.SqlConnection;
 import dev.necron.token.common.storage.type.sql.connection.SqlConnectionType;
+import dev.necron.token.common.storage.type.sql.connection.credentials.SqlCredentials;
 import dev.necron.token.common.token.TokenPlayer;
 
 import java.sql.SQLException;
@@ -21,11 +22,13 @@ public class SQLStorage implements Storage {
         SqlConnectionType connectionType = SqlConnectionType.valueOf(type.toUpperCase());
         try {
             connection = (SqlConnection) connectionType.getClazz().newInstance();
-            connection.init(ConfigKeys.Settings.SQL_HOST.getValue(),
+            SqlCredentials credentials = SqlCredentials.of(
+                    ConfigKeys.Settings.SQL_HOST.getValue(),
                     ConfigKeys.Settings.SQL_PORT.getValue(),
                     ConfigKeys.Settings.SQL_DATABASE.getValue(),
                     ConfigKeys.Settings.SQL_USERNAME.getValue(),
                     ConfigKeys.Settings.SQL_PASSWORD.getValue());
+            connection.init(credentials);
         }catch (Exception e) {
             e.printStackTrace();
         }
