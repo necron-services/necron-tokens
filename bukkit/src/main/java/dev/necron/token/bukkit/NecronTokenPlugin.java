@@ -46,6 +46,8 @@ public final class NecronTokenPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
 
+        StorageProvider.shutdown();
+
     }
 
     public void reloadConfigs() {

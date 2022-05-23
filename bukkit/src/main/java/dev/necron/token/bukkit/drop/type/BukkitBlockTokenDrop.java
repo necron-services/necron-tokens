@@ -1,6 +1,7 @@
 package dev.necron.token.bukkit.drop.type;
 
 import dev.necron.token.common.drop.type.BlockTokenDrop;
+import dev.necron.token.common.token.TokenPlayerHandler;
 import dev.necron.token.common.util.ChanceUtil;
 import dev.necron.token.common.util.RandomUtil;
 import org.bukkit.block.Block;
@@ -21,6 +22,7 @@ public class BukkitBlockTokenDrop extends BlockTokenDrop {
         if (!(ChanceUtil.tryChance(getChance()))) return;
         long amount = RandomUtil.random(getMinDrop(), getMaxDrop());
         ((Player) player).sendMessage("§6You got §e" + amount + " §6tokens!");
+        TokenPlayerHandler.find(((Player) player).getUniqueId()).ifPresent(tokenPlayer -> tokenPlayer.addTokens(amount));
     }
 
     @Override

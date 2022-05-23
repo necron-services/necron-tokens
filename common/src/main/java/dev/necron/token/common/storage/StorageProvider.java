@@ -1,17 +1,19 @@
 package dev.necron.token.common.storage;
 
 import dev.necron.token.common.config.key.ConfigKeys;
-import dev.necron.token.common.storage.type.MongoDBStorage;
-import dev.necron.token.common.storage.type.SQLiteStorage;
+import dev.necron.token.common.storage.type.mongodb.MongoStorage;
+import dev.necron.token.common.token.TokenPlayerHandler;
 import lombok.Getter;
 import lombok.Setter;
 
 public final class StorageProvider {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private static Storage storage;
 
-    private StorageProvider() {}
+    private StorageProvider() {
+    }
 
     public static void init() {
         StorageType storageType = StorageType.of(ConfigKeys.Settings.STORAGE_TYPE.getValue());
@@ -21,14 +23,23 @@ public final class StorageProvider {
         }
         if (storageType == StorageType.CUSTOM) return;
         Storage storage = createImplementation(storageType);
+        storage.init();
         setStorage(storage);
+    }
+
+    public static void shutdown() {
+        if (storage != null) {
+            storage.savePlayers(TokenPlayerHandler.findAll());
+            storage.shutdown();
+        }
     }
 
     public static Storage createImplementation(StorageType storageType) {
         switch (storageType) {
-            case MONGODB: return new MongoDBStorage();
-            default: return new SQLiteStorage();
+            case MONGODB:
+                return new MongoStorage();
         }
+        return null;
     }
 
 }

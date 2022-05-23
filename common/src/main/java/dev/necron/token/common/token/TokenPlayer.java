@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 public class TokenPlayer {
 
-    private final UUID playerUUID;
+    private final UUID uuid;
     private long tokens;
 
     /**

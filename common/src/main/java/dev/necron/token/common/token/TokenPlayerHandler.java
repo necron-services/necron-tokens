@@ -2,10 +2,7 @@ package dev.necron.token.common.token;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public class TokenPlayerHandler {
@@ -13,12 +10,20 @@ public class TokenPlayerHandler {
     private static final Map<UUID, TokenPlayer> tokenPlayerMap = new HashMap<>();
 
     /**
+     * gets TokenPlayers from map
+     * @return the TokenPlayers
+     */
+    public static Collection<TokenPlayer> findAll() {
+        return tokenPlayerMap.values();
+    }
+
+    /**
      * get a TokenPlayer from the map
      *
      * @param uuid The UUID of the player
      * @return The TokenPlayer
      */
-    public Optional<TokenPlayer> getTokenPlayer(UUID uuid) {
+    public static Optional<TokenPlayer> find(UUID uuid) {
         return Optional.ofNullable(tokenPlayerMap.get(uuid));
     }
 
@@ -27,17 +32,26 @@ public class TokenPlayerHandler {
      *
      * @param tokenPlayer The TokenPlayer to add
      */
-    public void put(TokenPlayer tokenPlayer) {
-        tokenPlayerMap.put(tokenPlayer.getPlayerUUID(), tokenPlayer);
+    public static void put(TokenPlayer tokenPlayer) {
+        tokenPlayerMap.put(tokenPlayer.getUuid(), tokenPlayer);
     }
 
     /**
      * remove a TokenPlayer from the map
      *
-     * @param playerUUID The UUID of the player
+     * @param uuid The UUID of the player
      */
-    public void remove(UUID playerUUID) {
-        tokenPlayerMap.remove(playerUUID);
+    public static void remove(UUID uuid) {
+        tokenPlayerMap.remove(uuid);
+    }
+
+    /**
+     * get the size of the map
+     *
+     * @return The size of the map
+     */
+    public static int size() {
+        return tokenPlayerMap.size();
     }
 
 }

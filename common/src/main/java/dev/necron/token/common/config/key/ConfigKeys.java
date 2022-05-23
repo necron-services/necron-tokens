@@ -23,6 +23,12 @@ public final class ConfigKeys {
         public static final ConfigKey<String> MONGODB_DB = new ConfigKey<>("test", ConfigType.SETTINGS, "storage", "mongodb", "db");
         public static final ConfigKey<String> MONGODB_COLLECTION = new ConfigKey<>("collection", ConfigType.SETTINGS, "storage", "mongodb", "collection");
 
+        public static final ConfigKey<String> SQL_HOST = new ConfigKey<>("localhost", ConfigType.SETTINGS, "storage", "sql", "host");
+        public static final ConfigKey<Integer> SQL_PORT = new ConfigKey<>(3306, ConfigType.SETTINGS, "storage", "sql", "port");
+        public static final ConfigKey<String> SQL_DATABASE = new ConfigKey<>("test", ConfigType.SETTINGS, "storage", "sql", "database");
+        public static final ConfigKey<String> SQL_USERNAME = new ConfigKey<>("root", ConfigType.SETTINGS, "storage", "sql", "username");
+        public static final ConfigKey<String> SQL_PASSWORD = new ConfigKey<>("", ConfigType.SETTINGS, "storage", "sql", "password");
+
     }
 
     public static final class Language {
