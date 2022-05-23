@@ -1,4 +1,4 @@
-package dev.necron.token.common.shop.item.value.impl;
+package dev.necron.token.common.shop.item.value.type;
 
 import dev.necron.token.common.shop.item.value.ShopValue;
 import lombok.Getter;

@@ -11,7 +11,8 @@ dependencies {
 }
 
 shadowJar {
-    relocate 'co.aikar', 'dev.necron.token.libraries.co.aikar'
+    relocate 'co.aikar.commands', 'dev.necron.token.libraries.aikar.acf'
+    relocate 'co.aikar.locales', 'dev.necron.token.libraries.aikar.locales'
     relocate 'com.google', 'dev.necron.token.libraries.com.google'
     relocate 'ninja.leaping', 'dev.necron.token.libraries.ninja.leaping'
 

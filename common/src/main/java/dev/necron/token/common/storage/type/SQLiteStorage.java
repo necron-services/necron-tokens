@@ -1,4 +1,4 @@
-package dev.necron.token.common.storage.impl;
+package dev.necron.token.common.storage.type;
 
 import dev.necron.token.common.storage.Storage;
 import dev.necron.token.common.token.TokenPlayer;

@@ -3,14 +3,15 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-allprojects {
-    group 'dev.necron'
-    version '1.0.0'
-}
-
 subprojects {
     apply plugin: 'java'
     apply plugin: 'com.github.johnrengelman.shadow'
+
+    group 'dev.necron'
+    version '1.0.0'
+    sourceCompatibility = 8
+    targetCompatibility = 8
+    compileJava.options.encoding = 'UTF-8'
 
     repositories {
         mavenCentral()
@@ -23,16 +24,6 @@ subprojects {
         compileOnly 'org.jetbrains:annotations:23.0.0'
 
         annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    }
-
-    def targetJavaVersion = 8
-    java {
-        def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-        if (JavaVersion.current() < javaVersion) {
-            toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-        }
     }
 
 }

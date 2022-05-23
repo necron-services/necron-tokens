@@ -1,6 +1,6 @@
 package dev.necron.token.bukkit.drop.type;
 
-import dev.necron.token.common.drop.impl.BlockTokenDrop;
+import dev.necron.token.common.drop.type.BlockTokenDrop;
 import dev.necron.token.common.util.ChanceUtil;
 import dev.necron.token.common.util.RandomUtil;
 import org.bukkit.block.Block;
@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 
 public class BukkitBlockTokenDrop extends BlockTokenDrop {
 
-    public BukkitBlockTokenDrop(Object dropper, byte dropperData, long minDrop, long maxDrop, double chance) {
-        super(dropper, dropperData, minDrop, maxDrop, chance);
+    public BukkitBlockTokenDrop(Object dropper, byte dropperData, double chance, long minDrop, long maxDrop) {
+        super(dropper, dropperData, chance, minDrop, maxDrop);
     }
 
     @Override

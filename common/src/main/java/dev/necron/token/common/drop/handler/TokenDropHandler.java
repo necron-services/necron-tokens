@@ -14,6 +14,7 @@ public class TokenDropHandler {
 
     /**
      * Initialize the drop handler
+     *
      * @param dropLoader The drop loader
      */
     public static void init(TokenDropLoader dropLoader) {
@@ -24,9 +25,16 @@ public class TokenDropHandler {
         }
     }
 
+    public static void execute(TokenDropType type, Object player, Object executableObject) {
+        Optional.ofNullable(TokenDropHandler.drops.get(type)).ifPresent(drops -> {
+            for (TokenDrop drop : drops) drop.execute(player, executableObject);
+        });
+    }
+
     /**
      * Register a drops
-     * @param type The type of drops
+     *
+     * @param type  The type of drops
      * @param drops The drops
      */
     public static void register(TokenDropType type, TokenDrop... drops) {
@@ -35,6 +43,7 @@ public class TokenDropHandler {
 
     /**
      * Unregister a drops
+     *
      * @param type The type of drops
      */
     public static void unregister(TokenDropType type) {
@@ -43,16 +52,24 @@ public class TokenDropHandler {
 
     /**
      * Put a drop
+     *
      * @param type The type of drops
      * @param drop The drop
      */
     public static void put(TokenDropType type, TokenDrop drop) {
         Optional<TokenDrop[]> tokenDrops = find(type);
-        tokenDrops.ifPresentOrElse(drops -> drops[drops.length - 1] = drop, () -> register(type, drop));
+        if (tokenDrops.isPresent()) {
+            TokenDrop[] drops = tokenDrops.get();
+            TokenDrop[] newDrops = new TokenDrop[drops.length + 1];
+            System.arraycopy(drops, 0, newDrops, 0, drops.length);
+            newDrops[drops.length] = drop;
+            TokenDropHandler.drops.put(type, newDrops);
+        } else TokenDropHandler.drops.put(type, new TokenDrop[]{drop});
     }
 
     /**
      * Remove a drop
+     *
      * @param type The type of drops
      * @return The removed drop
      */
@@ -67,6 +84,7 @@ public class TokenDropHandler {
 
     /**
      * Find a drop
+     *
      * @param type The type of drops
      * @return The drop
      */

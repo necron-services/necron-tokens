@@ -1,4 +1,4 @@
-package dev.necron.token.common.drop.impl;
+package dev.necron.token.common.drop.type;
 
 import dev.necron.token.common.drop.TokenDrop;
 import lombok.Getter;
@@ -6,12 +6,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public abstract class BlockTokenDrop implements TokenDrop {
+public abstract class EntityTokenDrop implements TokenDrop {
 
     private final Object dropper;
-    private final byte dropperData;
+    private final double chance;
     private final long minDrop;
     private final long maxDrop;
-    private final double chance;
 
 }

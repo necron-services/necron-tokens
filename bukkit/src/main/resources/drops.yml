@@ -1,0 +1,52 @@
+drops:
+
+  #Entity drops
+  entity:
+    ZOMBIE:
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    CREEPER:
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    SKELETON:
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    SPIDER:
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    ENDERMAN:
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+
+  #Block drops
+  block:
+    COAL_ORE:
+      data: 0
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    IRON_ORE:
+      data: 0
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    GOLD_ORE:
+      data: 0
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    DIAMOND_ORE:
+      data: 0
+      chance: 100.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens
+    LAPIS_ORE:
+      data: 0
+      chance: 50.0 # chance of dropping tokens
+      min: 3 # minimum amount of tokens
+      max: 5 # maximum amount of tokens

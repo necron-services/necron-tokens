@@ -1,6 +1,6 @@
-package dev.necron.token.bukkit.shop.value;
+package dev.necron.token.bukkit.shop.type;
 
-import dev.necron.token.common.shop.item.value.impl.ItemShopValue;
+import dev.necron.token.common.shop.item.value.type.ItemShopValue;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

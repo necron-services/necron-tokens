@@ -1,8 +1,8 @@
 package dev.necron.token.common.storage;
 
 import dev.necron.token.common.config.key.ConfigKeys;
-import dev.necron.token.common.storage.impl.MongoDBStorage;
-import dev.necron.token.common.storage.impl.SQLiteStorage;
+import dev.necron.token.common.storage.type.MongoDBStorage;
+import dev.necron.token.common.storage.type.SQLiteStorage;
 import lombok.Getter;
 import lombok.Setter;
 
