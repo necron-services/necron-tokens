@@ -1,6 +1,8 @@
 package dev.necron.token.bukkit;
 
 import co.aikar.commands.BukkitCommandManager;
+import dev.necron.token.bukkit.drop.loader.BukkitTokenDropLoader;
+import dev.necron.token.common.drop.handler.TokenDropHandler;
 import dev.necron.token.common.shop.handler.ShopHandler;
 import dev.necron.token.common.storage.StorageProvider;
 import dev.necron.token.bukkit.command.TokenCommand;
@@ -29,6 +31,7 @@ public final class NecronTokenPlugin extends JavaPlugin {
         reloadConfigs();
         StorageProvider.init();
         ShopHandler.init(new BukkitShopLoader());
+        TokenDropHandler.init(new BukkitTokenDropLoader());
 
         BukkitCommandManager commandManager = new BukkitCommandManager(this);
         commandManager.registerCommand(new TokenCommand());

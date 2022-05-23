@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface ShopLoader {
 
     /**
-     * Loads the shops method
+     * Loads the shops
      * @return the shops
      */
     Collection<Shop> load() throws Exception;

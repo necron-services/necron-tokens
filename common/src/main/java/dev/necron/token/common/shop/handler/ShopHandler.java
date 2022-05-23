@@ -11,6 +11,10 @@ public class ShopHandler {
 
     private static final Map<String, Shop> shopMap = new HashMap<>();
 
+    /**
+     * Initialize the shop handler
+     * @param shopLoader The shop loader
+     */
     public static void init(ShopLoader shopLoader) {
         try {
             shopLoader.load().forEach(shop -> shopMap.put(shop.getName(), shop));
