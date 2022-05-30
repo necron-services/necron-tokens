@@ -58,7 +58,7 @@ public class ConfigHandler {
     public static Optional<Config> createConfig(String name, String path, InputStream inputStream) {
         path = "plugins/NecronTokens/" + path;
         try {
-            return Optional.of(new Config(name, path, NodeLoader.loadNode(path, inputStream)));
+            return Optional.of(new Config(name, path, NodeLoader.load(path, inputStream)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class ConfigHandler {
     public static Optional<Config> createConfig(String name, String path) {
         path = "plugins/NecronTokens/" + path;
         try {
-            return Optional.of(new Config(name, path, NodeLoader.loadNode(path)));
+            return Optional.of(new Config(name, path, NodeLoader.load(path)));
         } catch (IOException e) {
             e.printStackTrace();
         }

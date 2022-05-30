@@ -23,17 +23,17 @@ public class MenuLoader {
             if (files == null || files.length == 0) {
                 ClassLoader classLoader = NecronTokensPlugin.class.getClassLoader();
                 try {
-                    NodeLoader.loadNode(dataFolder + "/menu/shop_selector_menu.yml", classLoader.getResourceAsStream("menu/shop_selector_menu.yml"));
-                    NodeLoader.loadNode(dataFolder + "/menu/example_shop_v1_menu.yml", classLoader.getResourceAsStream("menu/example_shop_v1_menu.yml"));
-                    NodeLoader.loadNode(dataFolder + "/menu/example_shop_v2_menu.yml", classLoader.getResourceAsStream("menu/example_shop_v2_menu.yml"));
+                    NodeLoader.load(dataFolder + "/menu/shop_selector_menu.yml", classLoader.getResourceAsStream("menu/shop_selector_menu.yml"));
+                    NodeLoader.load(dataFolder + "/menu/example_shop_v1_menu.yml", classLoader.getResourceAsStream("menu/example_shop_v1_menu.yml"));
+                    NodeLoader.load(dataFolder + "/menu/example_shop_v2_menu.yml", classLoader.getResourceAsStream("menu/example_shop_v2_menu.yml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             Collection<Menu> menus = new HashSet<>();
-            Arrays.stream(files).forEach(file -> {
+            Arrays.asList(files).forEach(file -> {
                 try {
-                    ConfigurationNode node = NodeLoader.loadNode(file).getNode("menu");
+                    ConfigurationNode node = NodeLoader.load(file).getNode("menu");
                     Menu menu = new Menu(node, file.getName()
                             .toUpperCase(Locale.ROOT)
                             .replace(".yml", "")

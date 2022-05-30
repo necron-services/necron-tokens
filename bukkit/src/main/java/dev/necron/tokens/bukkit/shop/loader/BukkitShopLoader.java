@@ -3,7 +3,6 @@ package dev.necron.tokens.bukkit.shop.loader;
 import dev.necron.tokens.bukkit.NecronTokensPlugin;
 import dev.necron.tokens.bukkit.menu.button.builder.item.MenuItemBuilder;
 import dev.necron.tokens.bukkit.shop.item.requirement.BukkitShopRequirementType;
-import dev.necron.tokens.bukkit.shop.item.requirement.type.*;
 import dev.necron.tokens.bukkit.shop.item.value.BukkitShopValueType;
 import dev.necron.tokens.bukkit.shop.item.value.type.CommandShopValue;
 import dev.necron.tokens.bukkit.shop.item.value.type.ItemShopValue;
@@ -33,16 +32,16 @@ public class BukkitShopLoader implements ShopLoader {
             if (files == null || files.length == 0) {
                 ClassLoader classLoader = NecronTokensPlugin.class.getClassLoader();
                 try {
-                    NodeLoader.loadNode(dataFolder + "/shop/example_shop_v1.yml", classLoader.getResourceAsStream("shop/example_shop_v1.yml"));
-                    NodeLoader.loadNode(dataFolder + "/shop/example_shop_v2.yml", classLoader.getResourceAsStream("shop/example_shop_v2.yml"));
+                    NodeLoader.load(dataFolder + "/shop/example_shop_v1.yml", classLoader.getResourceAsStream("shop/example_shop_v1.yml"));
+                    NodeLoader.load(dataFolder + "/shop/example_shop_v2.yml", classLoader.getResourceAsStream("shop/example_shop_v2.yml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             Collection<Shop> shops = new HashSet<>();
-            Arrays.stream(files).forEach(file -> {
+            Arrays.asList(files).forEach(file -> {
                 try {
-                    ConfigurationNode node = NodeLoader.loadNode(file).getNode("shop");
+                    ConfigurationNode node = NodeLoader.load(file).getNode("shop");
                     Shop shop = new Shop(node.getNode("name").getString(), node.getNode("refresh-time").getInt());
                     node = node.getNode("items");
                     for (ConfigurationNode child : node.getChildrenMap().values()) {
@@ -55,8 +54,8 @@ public class BukkitShopLoader implements ShopLoader {
                                 System.out.println("Unknown requirement type: " + requirement[0]);
                                 continue;
                             }
-                            ShopRequirement shopRequirement = type.create(requirement[1]);
-                            shopItem.putShopRequirement(shopRequirement);
+                            ShopRequirement shopRequirement = type.parse(requirement[1]);
+                            shopItem.putRequirement(shopRequirement);
                         }
                         ConfigurationNode values = child.getNode("values");
                         for (ConfigurationNode value : values.getChildrenMap().values()) {
@@ -72,12 +71,12 @@ public class BukkitShopLoader implements ShopLoader {
                             }
                             switch (type) {
                                 case COMMAND:
-                                    shopItem.putShopValue(name, new CommandShopValue(value.getNode("command").getString()));
+                                    shopItem.putValue(name, new CommandShopValue(value.getNode("command").getString()));
                                     break;
                                 case ITEM:
                                     MenuItemBuilder menuItemBuilder = MenuItemBuilder.of(value.getNode("item"));
                                     ItemShopValue itemShopValue = new ItemShopValue(menuItemBuilder.build());
-                                    shopItem.putShopValue(name, itemShopValue);
+                                    shopItem.putValue(name, itemShopValue);
                                     break;
                             }
                         }

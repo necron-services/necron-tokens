@@ -20,7 +20,7 @@ public class NodeLoader {
      * @return the node
      * @throws IOException if the node is not found
      */
-    public static ConfigurationNode loadNode(String path) throws IOException {
+    public static ConfigurationNode load(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
@@ -43,7 +43,7 @@ public class NodeLoader {
      * @return the node
      * @throws IOException if the node is not found
      */
-    public static ConfigurationNode loadNode(String path, InputStream inputStream) throws IOException {
+    public static ConfigurationNode load(String path, InputStream inputStream) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
@@ -66,7 +66,7 @@ public class NodeLoader {
         return loader.load();
     }
 
-    public static ConfigurationNode loadNode(File file) throws IOException {
+    public static ConfigurationNode load(File file) throws IOException {
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             file.createNewFile();

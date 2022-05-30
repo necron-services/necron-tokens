@@ -62,7 +62,7 @@ public class ShopItem {
      * @param name the name of the value
      * @return the value of the shop item
      */
-    public Optional<ShopValue> findShopValue(String name) {
+    public Optional<ShopValue> findValue(String name) {
         return Optional.ofNullable(shopValues.get(name));
     }
 
@@ -71,7 +71,7 @@ public class ShopItem {
      * @param key the name of the value
      * @param value the value
      */
-    public void putShopValue(String key, ShopValue value) {
+    public void putValue(String key, ShopValue value) {
         shopValues.put(key, value);
     }
 
@@ -79,7 +79,7 @@ public class ShopItem {
      * remove a shop value from the shop item
      * @param key the name of the value
      */
-    public void removeShopValue(String key) {
+    public void removeValue(String key) {
         shopValues.remove(key);
     }
 
@@ -87,7 +87,7 @@ public class ShopItem {
      * add a shop requirement to the shop item
      * @param requirement the requirement
      */
-    public void putShopRequirement(ShopRequirement requirement) {
+    public void putRequirement(ShopRequirement requirement) {
         shopRequirements.add(requirement);
     }
 
@@ -95,7 +95,7 @@ public class ShopItem {
      * remove a shop requirement from the shop item
      * @param requirement the requirement
      */
-    public void removeShopRequirement(ShopRequirement requirement) {
+    public void removeRequirement(ShopRequirement requirement) {
         shopRequirements.remove(requirement);
     }
 

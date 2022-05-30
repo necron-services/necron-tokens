@@ -22,6 +22,12 @@ public class TokenDropHandler {
         TokenDropHandler.drops.putAll(dropLoader.load());
     }
 
+    /**
+     * Execute the drops to the player with the drop type
+     * @param type The drop type
+     * @param playerUUID The player UUID
+     * @param executableObject The executable object
+     */
     public static void execute(TokenDropType type, UUID playerUUID, Object executableObject) {
         Optional.ofNullable(TokenDropHandler.drops.get(type)).ifPresent(drops -> {
             for (TokenDrop drop : drops) drop.execute(playerUUID, executableObject);

@@ -27,7 +27,8 @@ public enum BukkitShopRequirementType {
         return null;
     }
 
-    public ShopRequirement create(Object value) {
+    @Nullable
+    public ShopRequirement parse(Object value) {
         switch (this) {
             case TOKEN: return new TokenShopRequirement(Long.parseLong(value.toString()));
             case GROUP: return new GroupShopRequirement((String) value);
