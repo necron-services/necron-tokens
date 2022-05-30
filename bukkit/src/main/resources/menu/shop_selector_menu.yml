@@ -1,0 +1,24 @@
+menu:
+
+  title: "&a&lShop Selector"
+  size: 45
+
+  fill: "GRAY_STAINED_GLASS_PANE"
+
+  shop-selector-menu: true
+
+  items:
+
+    example-shop-v1:
+      shop: "ExampleShopV1"
+      slot: 5
+      material: "DIAMOND"
+      name: "&a&lExample Shop V1"
+      lore:
+        - "&7RefreshTime&8: &e%refresh-time%"
+        - "&7Click to open the shop"
+        - "&7&o(This is an example shop)"
+
+
+
+

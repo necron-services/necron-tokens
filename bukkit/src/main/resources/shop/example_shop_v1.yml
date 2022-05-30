@@ -1,0 +1,28 @@
+shop:
+
+  name: "ExampleShopV1"
+  refresh-time: 60
+
+  items:
+
+    example-shop-item-v1:
+      name: "ExampleShopItemV1"
+      stock: 10
+      requirements:
+        - "token: 50"
+        - "money: 50"
+        - "group: VIP"
+        - "perm: example.permission"
+        - "exp: 300"
+      values:
+        example-shop-item-value-v1:
+          type: "COMMAND"
+          command: "give %player% diamond 3"
+        example-shop-item-value-v2:
+          type: "ITEM"
+          item:
+            material: "DIAMOND_SWORD"
+            name: "&6&lExample Sword"
+            lore:
+              - "&7&oThis is a diamond sword"
+              - "&7&oIt is very powerful"

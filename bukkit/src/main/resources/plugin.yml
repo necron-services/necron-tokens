@@ -1,6 +1,7 @@
-name: NecronToken
+name: NecronTokens
 version: 1.0.0
-main: dev.necron.token.bukkit.NecronTokenPlugin
+main: dev.necron.tokens.bukkit.NecronTokensPlugin
 api-version: 1.13
 authors: [ Kafein ]
 description: Token plugin for minecraft servers.
+depend: [Vault]

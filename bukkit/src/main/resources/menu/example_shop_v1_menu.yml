@@ -1,0 +1,24 @@
+menu:
+
+  title: "&a&lExample Shop V1"
+  size: 45
+
+  fill: "GRAY_STAINED_GLASS_PANE"
+
+  shop: "ExampleShopV1"
+
+  items:
+
+    example-shop-item-v1:
+      shop-item: "ExampleShopItemV1"
+      slot: 5
+      material: "DIAMOND"
+      name: "&a&lExample Shop V1"
+      lore:
+        - "&7Stock&8: &e%stock%&8/&6%max-stock%"
+        - "&7Click to open the shop"
+        - "&7&o(This is an example shop)"
+
+
+
+
