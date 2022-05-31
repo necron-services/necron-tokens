@@ -16,6 +16,7 @@ import org.bukkit.entity.EntityType;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -35,11 +36,12 @@ public class BukkitTokenDropLoader implements TokenDropLoader {
             ConfigurationNode node = optionalConfig.get().getNode().getNode("drops");
 
             for (TokenDropType tokenDropType : TokenDropType.values()) {
-                ConfigurationNode dropNode = node.getNode(tokenDropType.name());
+                ConfigurationNode dropNode = node.getNode(tokenDropType.name().toLowerCase(Locale.ROOT));
                 if (dropNode.isEmpty() || !dropNode.getNode("enabled").getBoolean()) continue;
-                TokenDrop[] tokenDrops = new TokenDrop[]{};
+                TokenDrop[] tokenDrops = new TokenDrop[dropNode.getChildrenList().size()];
                 for (ConfigurationNode child : dropNode.getChildrenMap().values()) {
                     String type = String.valueOf(child.getKey());
+                    if (type.equalsIgnoreCase("enabled")) continue;
                     double chance = child.getNode("chance").getDouble();
                     long min = child.getNode("min").getLong();
                     long max = child.getNode("max").getLong();
@@ -65,6 +67,7 @@ public class BukkitTokenDropLoader implements TokenDropLoader {
                             break;
                     }
                 }
+                drops.put(tokenDropType, tokenDrops);
             }
 
             return drops;

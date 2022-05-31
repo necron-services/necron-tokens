@@ -1,22 +1,22 @@
 package dev.necron.tokens.common.storage.type.sql.connection;
 
 import dev.necron.tokens.common.storage.StorageType;
-import dev.necron.tokens.common.storage.type.sql.connection.type.MariaConnection;
-import dev.necron.tokens.common.storage.type.sql.connection.type.MysqlConnection;
+import dev.necron.tokens.common.storage.type.sql.connection.type.MariaDbConnection;
+import dev.necron.tokens.common.storage.type.sql.connection.type.MySqlConnection;
+import dev.necron.tokens.common.storage.type.sql.connection.type.PostgreSqlConnection;
 import dev.necron.tokens.common.storage.type.sql.connection.type.SqliteConnection;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Locale;
 
 @RequiredArgsConstructor
 @Getter
 public enum SqlConnectionType {
 
     SQLITE(SqliteConnection.class),
-    MYSQL(MysqlConnection.class),
-    MARIADB(MariaConnection.class);
+    MYSQL(MySqlConnection.class),
+    MARIADB(MariaDbConnection.class),
+    POSTGRESQL(PostgreSqlConnection.class);
 
     private final Class<?> clazz;
 

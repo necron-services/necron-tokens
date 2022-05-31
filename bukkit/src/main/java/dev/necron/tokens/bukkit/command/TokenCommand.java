@@ -68,7 +68,8 @@ public class TokenCommand extends BaseCommand {
         //TODO: Add get tokens command
     }
 
-    @Subcommand("shop")
+    @CommandAlias("tokenshop|tokenmarket")
+    @Subcommand("shop|market")
     @Description("Open shop")
     public void onShop(CommandSender sender) {
         if (!(sender instanceof Player)) {
