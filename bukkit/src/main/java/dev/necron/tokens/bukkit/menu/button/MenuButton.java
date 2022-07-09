@@ -1,8 +1,9 @@
 package dev.necron.tokens.bukkit.menu.button;
 
 import dev.necron.tokens.bukkit.menu.Menu;
-import dev.necron.tokens.bukkit.menu.button.builder.item.MenuItemBuilder;
-import dev.necron.tokens.common.shop.handler.ShopHandler;
+import dev.necron.tokens.bukkit.menu.builder.button.item.MenuItemBuilder;
+import dev.necron.tokens.common.shop.ShopManager;
+import dev.necron.tokens.common.util.ChanceUtil;
 import dev.necron.tokens.common.util.TimeParser;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,15 +15,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-@Getter @Setter
+@Getter
+@Setter
 public class MenuButton {
 
     private ItemStack item;
     private int slot;
 
-    @Nullable private Sound clickSound;
-    @Nullable private String shop, shopItem;
-    private long lastRefresh;
+    @Nullable
+    private Sound clickSound;
+    @Nullable
+    private String shop, shopItem;
+    private boolean selected;
+    private double chance;
 
     private Consumer<InventoryClickEvent> clickEvent;
 
@@ -36,27 +41,40 @@ public class MenuButton {
     }
 
     public boolean refresh(Menu menu) {
-        if (lastRefresh != 0 && System.currentTimeMillis() - lastRefresh < 1000) return false;
+        if (!selected) return false;
         if (menu.isShopSelector() && shop != null) {
-            ShopHandler.find(shop).ifPresent(shop -> {
+            ShopManager.find(shop).ifPresent(shop -> {
                 MenuItemBuilder builder = MenuItemBuilder.of(node,
                         new String[]{"%refresh-time%"},
                         new String[]{TimeParser.parse(shop.getRefreshTimeLeft())});
                 item = builder.build();
             });
         } else if (shopItem != null) {
-            ShopHandler.find(menu.getShopName()).flatMap(shop -> shop.find(shopItem)).ifPresent(selectedShopItem -> {
-                MenuItemBuilder builder = MenuItemBuilder.of(node,
-                        new String[]{"%stock%", "%max-stock%"},
-                        new String[]{String.valueOf(selectedShopItem.getStock()), String.valueOf(selectedShopItem.getMaxStock())});
-                item = builder.build();
+            ShopManager.find(menu.getShopName()).ifPresent(shop -> {
+                shop.find(shopItem).ifPresent(selectedShopItem -> {
+                    MenuItemBuilder builder = MenuItemBuilder.of(node,
+                            new String[]{
+                                    "%stock%",
+                                    "%max-stock%",
+                                    "%refresh-time%"
+                            },
+                            new String[]{
+                                    String.valueOf(selectedShopItem.getStock()),
+                                    String.valueOf(selectedShopItem.getMaxStock()),
+                                    TimeParser.parse(shop.getRefreshTimeLeft())
+                            });
+                    item = builder.build();
+                });
             });
         } else {
             MenuItemBuilder builder = MenuItemBuilder.of(node);
             item = builder.build();
         }
-        lastRefresh = System.currentTimeMillis();
         return true;
+    }
+
+    public boolean tryChance() {
+        return ChanceUtil.tryChance(chance);
     }
 
 }

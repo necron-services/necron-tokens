@@ -13,6 +13,8 @@ public interface TokenDrop {
 
     /**
      * Executes the drop.
+     * If you want to execute without chance use this.
+     *
      * @param playerUUID The player who dropped the token.
      * @param <T> The type of dropper.
      * @param amount The amount of tokens to drop.

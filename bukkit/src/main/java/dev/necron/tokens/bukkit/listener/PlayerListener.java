@@ -2,7 +2,7 @@ package dev.necron.tokens.bukkit.listener;
 
 import dev.necron.tokens.common.storage.Storage;
 import dev.necron.tokens.common.storage.StorageProvider;
-import dev.necron.tokens.common.token.TokenPlayerHandler;
+import dev.necron.tokens.common.player.TokenPlayerManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -15,12 +15,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onJoin(PlayerJoinEvent event) {
-        storage.loadPlayer(event.getPlayer().getUniqueId()).ifPresent(TokenPlayerHandler::put);
+        storage.loadPlayer(event.getPlayer().getUniqueId()).ifPresent(TokenPlayerManager::put);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onQuit(PlayerQuitEvent event) {
-        TokenPlayerHandler.find(event.getPlayer().getUniqueId()).ifPresent(storage::savePlayer);
+        TokenPlayerManager.find(event.getPlayer().getUniqueId()).ifPresent(storage::savePlayer);
     }
 
 }

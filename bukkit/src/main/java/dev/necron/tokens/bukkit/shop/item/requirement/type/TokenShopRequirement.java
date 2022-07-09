@@ -1,8 +1,8 @@
 package dev.necron.tokens.bukkit.shop.item.requirement.type;
 
 import dev.necron.tokens.common.shop.item.requirement.ShopRequirement;
-import dev.necron.tokens.common.token.TokenPlayer;
-import dev.necron.tokens.common.token.TokenPlayerHandler;
+import dev.necron.tokens.common.player.TokenPlayer;
+import dev.necron.tokens.common.player.TokenPlayerManager;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -15,16 +15,16 @@ public class TokenShopRequirement implements ShopRequirement {
 
     @Override
     public boolean has(UUID playerUUID) {
-        Optional<TokenPlayer> optionalTokenPlayer = TokenPlayerHandler.find(playerUUID);
+        Optional<TokenPlayer> optionalTokenPlayer = TokenPlayerManager.find(playerUUID);
         return optionalTokenPlayer.isPresent() && optionalTokenPlayer.get().getTokens() >= tokens;
     }
 
     @Override
     public void execute(UUID playerUUID) {
-        Optional<TokenPlayer> optionalTokenPlayer = TokenPlayerHandler.find(playerUUID);
+        Optional<TokenPlayer> optionalTokenPlayer = TokenPlayerManager.find(playerUUID);
         if (optionalTokenPlayer.isPresent()) {
             TokenPlayer tokenPlayer = optionalTokenPlayer.get();
-            tokenPlayer.removeTokens(tokens);
+            tokenPlayer.takeTokens(tokens);
         }
     }
 

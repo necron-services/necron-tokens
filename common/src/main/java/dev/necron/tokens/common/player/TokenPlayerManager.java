@@ -1,11 +1,11 @@
-package dev.necron.tokens.common.token;
+package dev.necron.tokens.common.player;
 
 import lombok.Getter;
 
 import java.util.*;
 
 @Getter
-public class TokenPlayerHandler {
+public class TokenPlayerManager {
 
     private static final Map<UUID, TokenPlayer> tokenPlayerMap = new HashMap<>();
 
@@ -18,7 +18,7 @@ public class TokenPlayerHandler {
     }
 
     /**
-     * get a TokenPlayer from the map
+     * find a TokenPlayer from the map
      *
      * @param uuid The UUID of the player
      * @return The TokenPlayer
@@ -28,11 +28,23 @@ public class TokenPlayerHandler {
     }
 
     /**
+     * get a TokenPlayer from the map
+     * if the player doesn't exist, throws exception
+     *
+     * @param uuid The UUID of the player
+     * @return The TokenPlayer
+     */
+    public static TokenPlayer get(UUID uuid) {
+        return find(uuid).orElseThrow(() -> new IllegalArgumentException("Player not found"));
+    }
+
+    /**
      * add a TokenPlayer to the map
      *
      * @param tokenPlayer The TokenPlayer to add
      */
     public static void put(TokenPlayer tokenPlayer) {
+        tokenPlayer.setJoinedTimeMillis(System.currentTimeMillis());
         tokenPlayerMap.put(tokenPlayer.getUuid(), tokenPlayer);
     }
 

@@ -1,6 +1,6 @@
 package dev.necron.tokens.bukkit.listener;
 
-import dev.necron.tokens.bukkit.menu.handler.MenuHandler;
+import dev.necron.tokens.bukkit.menu.MenuManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,7 @@ public class InventoryListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         String title = event.getView().getTitle();
-        MenuHandler.findByTitle(title, true).ifPresent(menu -> {
+        MenuManager.findMenuByTitle(title, true).ifPresent(menu -> {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             if (item == null) return;
@@ -32,10 +32,11 @@ public class InventoryListener implements Listener {
     public void onOpen(InventoryOpenEvent event) {
         if (!(event.getPlayer() instanceof Player)) return;
         String title = event.getView().getTitle();
-        MenuHandler.findByTitle(title, true).ifPresent(menu -> {
+        MenuManager.findMenuByTitle(title, true).ifPresent(menu -> {
             Player player = (Player) event.getPlayer();
             Sound sound = menu.getOpenSound();
             if (sound != null) player.playSound(player.getLocation(), sound, 1, 1);
+            MenuManager.putViewer(player.getUniqueId(), menu.getName());
         });
     }
 
@@ -43,10 +44,11 @@ public class InventoryListener implements Listener {
     public void onClose(InventoryOpenEvent event) {
         if (!(event.getPlayer() instanceof Player)) return;
         String title = event.getView().getTitle();
-        MenuHandler.findByTitle(title, true).ifPresent(menu -> {
+        MenuManager.findMenuByTitle(title, true).ifPresent(menu -> {
             Player player = (Player) event.getPlayer();
             Sound sound = menu.getCloseSound();
             if (sound != null) player.playSound(player.getLocation(), sound, 1, 1);
+            MenuManager.removeViewer(player.getUniqueId());
         });
     }
 

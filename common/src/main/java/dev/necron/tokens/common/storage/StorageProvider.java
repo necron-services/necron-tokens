@@ -3,7 +3,7 @@ package dev.necron.tokens.common.storage;
 import dev.necron.tokens.common.config.key.ConfigKeys;
 import dev.necron.tokens.common.storage.type.mongodb.MongoStorage;
 import dev.necron.tokens.common.storage.type.sql.SQLStorage;
-import dev.necron.tokens.common.token.TokenPlayerHandler;
+import dev.necron.tokens.common.player.TokenPlayerManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,7 +37,7 @@ public final class StorageProvider {
      */
     public static void shutdown() {
         if (storage != null) {
-            storage.savePlayers(TokenPlayerHandler.findAll());
+            storage.savePlayers(TokenPlayerManager.findAll());
             storage.shutdown();
         }
     }

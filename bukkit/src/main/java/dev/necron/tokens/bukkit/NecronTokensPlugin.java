@@ -1,53 +1,67 @@
 package dev.necron.tokens.bukkit;
 
-import co.aikar.commands.BukkitCommandManager;
+import com.google.common.collect.ImmutableList;
+import com.hakan.core.HCore;
+import com.hakan.core.command.HCommandHandler;
+import dev.necron.tokens.bukkit.blocker.Blockers;
+import dev.necron.tokens.bukkit.command.TokenShopCommand;
+import dev.necron.tokens.bukkit.command.admin.TokenAdminCommand;
 import dev.necron.tokens.bukkit.drop.loader.BukkitTokenDropLoader;
-import dev.necron.tokens.bukkit.listener.InventoryListener;
-import dev.necron.tokens.bukkit.menu.handler.MenuHandler;
-import dev.necron.tokens.common.NecronTokens;
-import dev.necron.tokens.common.drop.handler.TokenDropHandler;
+import dev.necron.tokens.bukkit.hook.PlaceholderHook;
+import dev.necron.tokens.bukkit.leaderboard.leader.finder.BukkitLeaderFinder;
+import dev.necron.tokens.bukkit.listener.*;
+import dev.necron.tokens.bukkit.menu.MenuManager;
+import dev.necron.tokens.bukkit.message.category.MessageCategories;
+import dev.necron.tokens.bukkit.runnable.EarnedTokensMessageRunnable;
+import dev.necron.tokens.bukkit.runnable.MenuRefreshRunnable;
+import dev.necron.tokens.common.drop.TokenDropManager;
+import dev.necron.tokens.common.leaderboard.Leaderboard;
+import dev.necron.tokens.common.runnable.LeaderboardRefreshRunnable;
 import dev.necron.tokens.common.runnable.ShopRefreshRunnable;
-import dev.necron.tokens.common.shop.handler.ShopHandler;
+import dev.necron.tokens.common.shop.ShopManager;
 import dev.necron.tokens.common.storage.StorageProvider;
 import dev.necron.tokens.bukkit.command.TokenCommand;
-import dev.necron.tokens.bukkit.listener.BlockListener;
-import dev.necron.tokens.bukkit.listener.EntityListener;
-import dev.necron.tokens.bukkit.listener.PlayerListener;
 import dev.necron.tokens.bukkit.listener.adapter.BukkitListenerAdapter;
-import dev.necron.tokens.common.config.key.ConfigKeys;
-import dev.necron.tokens.common.config.handler.ConfigHandler;
-import dev.necron.tokens.common.config.ConfigType;
+import dev.necron.tokens.common.config.ConfigManager;
 import dev.necron.tokens.bukkit.shop.loader.BukkitShopLoader;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public final class NecronTokensPlugin extends JavaPlugin {
 
-    @Getter
-    private static NecronTokensPlugin instance;
+    private static final ImmutableList<Class<?>> LISTENERS = ImmutableList.of(
+            PlayerListener.class,
+            BlockListener.class,
+            EntityListener.class,
+            InventoryListener.class,
+            TokenDropListener.class
+    );
 
     @Override
     public void onEnable() {
-
-        instance = this;
-
-        reloadConfigs();
+        HCore.initialize(this);
+        ConfigManager.init();
         StorageProvider.init();
-        ShopHandler.init(new BukkitShopLoader());
-        TokenDropHandler.init(new BukkitTokenDropLoader());
-        MenuHandler.init();
+        Leaderboard.init(new BukkitLeaderFinder());
+        ShopManager.init(new BukkitShopLoader());
+        TokenDropManager.init(new BukkitTokenDropLoader());
+        MenuManager.init();
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new ShopRefreshRunnable(), 20L, 20L);
+        Blockers.reload();
+        MessageCategories.reload();
 
-        BukkitCommandManager commandManager = new BukkitCommandManager(this);
-        commandManager.registerCommand(new TokenCommand());
+        startAllRunnable();
 
-        BukkitListenerAdapter.register(this,
-                PlayerListener.class,
-                BlockListener.class,
-                EntityListener.class,
-                InventoryListener.class);
+        HCommandHandler.register(
+                new TokenCommand(),
+                new TokenAdminCommand(),
+                new TokenShopCommand()
+        );
+
+        BukkitListenerAdapter.register(this, LISTENERS);
+
+        new PlaceholderHook(this).register();
 
     }
 
@@ -58,21 +72,12 @@ public final class NecronTokensPlugin extends JavaPlugin {
 
     }
 
-    public void reloadConfigs() {
-        ClassLoader classLoader = NecronTokens.class.getClassLoader();
-        ConfigHandler.createConfig("settings",
-                "settings.yml",
-                classLoader.getResourceAsStream("settings.yml")).ifPresent(config -> {
-                    ConfigHandler.put(ConfigType.SETTINGS, config);
-                    ConfigHandler.putNodesToClass(config, ConfigType.SETTINGS.getClazz(), true);
-        });
-        String language = ConfigKeys.Settings.LANGUAGE.getValue();
-        ConfigHandler.createConfig("language",
-                "language/language_" + language + ".yml",
-                classLoader.getResourceAsStream("language/language_" + language + ".yml")).ifPresent(config -> {
-            ConfigHandler.put(ConfigType.LANGUAGE, config);
-            ConfigHandler.putNodesToClass(config, ConfigType.LANGUAGE.getClazz(), true);
-        });
+    private void startAllRunnable() {
+        BukkitScheduler scheduler = Bukkit.getScheduler();
+        scheduler.runTaskTimerAsynchronously(this, new ShopRefreshRunnable(), 20L, 20L);
+        scheduler.runTaskTimerAsynchronously(this, new LeaderboardRefreshRunnable(), 20L, 20L);
+        scheduler.runTaskTimer(this, new MenuRefreshRunnable(), 20L, 20L);
+        scheduler.runTaskTimer(this, new EarnedTokensMessageRunnable(), 20L, 20L);
     }
 
 }

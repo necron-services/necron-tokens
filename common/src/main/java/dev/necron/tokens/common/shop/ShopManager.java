@@ -1,6 +1,5 @@
-package dev.necron.tokens.common.shop.handler;
+package dev.necron.tokens.common.shop;
 
-import dev.necron.tokens.common.shop.Shop;
 import dev.necron.tokens.common.shop.loader.ShopLoader;
 
 import java.util.Collection;
@@ -8,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class ShopHandler {
+public class ShopManager {
 
     private static final Map<String, Shop> shopMap = new HashMap<>();
 
@@ -17,6 +16,7 @@ public class ShopHandler {
      * @param shopLoader The shop loader
      */
     public static void init(ShopLoader shopLoader) {
+        shopMap.clear();
         shopLoader.load().forEach(shop -> shopMap.put(shop.getName(), shop));
     }
 
@@ -52,7 +52,7 @@ public class ShopHandler {
      * Gets the shops.
      * @return The shops
      */
-    public static Collection<Shop> getShops() {
+    public static Collection<Shop> findAll() {
         return shopMap.values();
     }
 

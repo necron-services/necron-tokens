@@ -8,17 +8,16 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 @Getter @Setter
-public class TokenPayEvent extends Event {
+public class TokenSentEvent extends Event {
 
     @Getter
     private static final HandlerList handlerList = new HandlerList();
 
-    private final Player player;
-    private final Player target;
+    private final Player player, target;
     private long amount;
     private boolean cancelled;
 
-    public TokenPayEvent(Player player, Player target, long amount, boolean cancelled) {
+    public TokenSentEvent(Player player, Player target, long amount, boolean cancelled) {
         this.player = player;
         this.target = target;
         this.amount = amount;

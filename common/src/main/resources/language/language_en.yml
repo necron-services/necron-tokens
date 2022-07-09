@@ -1,15 +1,76 @@
 language:
 
-  prefix: "&6NecronToken &8➜"
+  prefix: "&6NecronTokens &8➜"
+
+  reloaded: "%prefix% &aSuccessfully reloaded."
 
   no-perm: "%prefix% &cYou don't have permission to use this command."
   no-player: "%prefix% &cYou must be a player to use this command."
   player-not-found: "%prefix% &cPlayer not found."
 
-  reloaded: "%prefix% &aSuccessfully reloaded."
-
   help-message:
     - ""
+    - "  &6&l❘ &e&lNecronTokens"
     - ""
+    - "  &e&l▪ &7/tokens view <player>"
+    - "   &8➜ &eView the player's tokens."
+    - ""
+    - "  &e&l▪ &7/tokens pay <player> <amount>"
+    - "   &8➜ &ePay tokens to the player."
     - ""
 
+  help-admin-message:
+    - ""
+    - "  &6&l❘ &e&lNecronTokens"
+    - ""
+    - "  &e&l▪ &7/necrontokens reload"
+    - "   &8➜ &eReload the plugin."
+    - ""
+    - " &e&l▪ &7/necrontokens refresh-shops"
+    - "  &8➜ &eRefresh the shops."
+    - ""
+    - "  &e&l▪ &7/necrontokens give <player> <amount>"
+    - "   &8➜ &eGive tokens to the player."
+    - ""
+    - "  &e&l▪ &7/necrontokens take <player> <amount>"
+    - "   &8➜ &eTake tokens from the player."
+    - ""
+    - " &e&l▪ &7/necrontokens set <player> <amount>"
+    - "  &8➜ &eSet the player's tokens."
+    - ""
+
+  token-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "message"
+    type: "message"
+    token-received: "%prefix% &7You received &a%amount% &7tokens from &e%player%&7."
+    token-sent: "%prefix% &7You sent &a%amount% &7tokens to &e%player%&7."
+    token-view: "%prefix% &e%player% &7has &a%amount% &7tokens."
+    error-messages:
+      not-enough-tokens: "%prefix% &cYou don't have enough tokens to do this."
+      cannot-send-to-self: "%prefix% &cYou cannot send tokens to yourself."
+      amount-not-valid: "%prefix% &cAmount not valid."
+    admin-messages:
+      token-added: "%prefix% &7You added &a%amount% &7tokens to &e%player%&7."
+      token-removed: "%prefix% &7You removed &a%amount% &7tokens from &e%player%&7."
+      token-set: "%prefix% &7You set &e%amount% &7tokens to &e%player%&7."
+
+  reward-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "actionbar"
+    type: "actionbar"
+    earned-tokens-from-block: "&7You earned &a&l%amount% &7tokens from the &d&l%block% &7with &a&l%chance%％ &7chance"
+    earned-tokens-from-entity: "&7You earned &a&l%amount% &7tokens from the &d&l%entity% &7with &a&l%chance%％ &7chance"
+    earned-tokens-last-time: "&7You have earned &a&l%amount% &7tokens the last time"
+
+  shop-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "message"
+    type: "actionbar"
+    inventory-full: "&cYour inventory is full."
+    not-enough-things: "&cYou don't have enough things to buy this."
+    bought-shop-item: "&aYou bought the &e%item% &aitem."
+    shops-has-been-refreshed: "&aShops has been refreshed!"

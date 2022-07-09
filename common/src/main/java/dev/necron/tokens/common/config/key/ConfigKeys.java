@@ -17,6 +17,27 @@ public final class ConfigKeys {
 
         public static final ConfigKey<String> ADMIN_PERM = new ConfigKey<>("token.admin", ConfigType.SETTINGS, "admin-perm");
 
+        public static final ConfigKey<Integer> LEADERBOARD_LIMIT = new ConfigKey<>(10, ConfigType.SETTINGS, "leaderboard", "limit");
+        public static final ConfigKey<Integer> LEADERBOARD_REGEN_TIME = new ConfigKey<>(60, ConfigType.SETTINGS, "leaderboard", "regen-time");
+
+        public static final ConfigKey<Boolean> SHOP_STACKING_SUPPORT = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "stacking-support");
+        public static final ConfigKey<Boolean> SHOP_CLOSE_MENU_ON_BUY = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "close-menu-on-buy");
+        public static final ConfigKey<Boolean> SHOP_SOUNDS_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "sounds", "enabled");
+        public static final ConfigKey<String> SHOP_BUY_SOUND = new ConfigKey<>("", ConfigType.SETTINGS, "shop", "sounds", "buy-sound");
+        public static final ConfigKey<String> SHOP_CANNOT_BUY_SOUND = new ConfigKey<>("", ConfigType.SETTINGS, "shop", "sounds", "cannot-buy-sound");
+
+        public static final ConfigKey<Boolean> WORLD_BLOCKER_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "world-blocker", "enabled");
+        public static final ConfigKey<String> WORLD_BLOCKER_TYPE = new ConfigKey<>("world", ConfigType.SETTINGS, "world-blocker", "type");
+        public static final ConfigKey<List<String>> BLOCKED_WORLDS = new ConfigKey<>(ImmutableList.of(), ConfigType.SETTINGS, "world-blocker", "worlds");
+
+        public static final ConfigKey<Boolean> EARN_TOKENS_SOUND_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "earn-token-sounds", "enabled");
+        public static final ConfigKey<String> EARN_TOKENS_FROM_ENTITY_SOUND = new ConfigKey<>("", ConfigType.SETTINGS, "earn-token-sounds", "from-entity");
+        public static final ConfigKey<String> EARN_TOKENS_FROM_BLOCK_SOUND = new ConfigKey<>("", ConfigType.SETTINGS, "earn-token-sounds", "from-block");
+
+        public static final ConfigKey<Boolean> EARNED_TOKENS_MESSAGE_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "earned-tokens-message", "enabled");
+        public static final ConfigKey<Integer> EARNED_TOKENS_MESSAGE_TIMER = new ConfigKey<>(300, ConfigType.SETTINGS, "earned-tokens-message", "timer");
+        public static final ConfigKey<Boolean> RESET_PLAYERS_EARNED_TOKENS = new ConfigKey<>(true, ConfigType.SETTINGS, "earned-tokens-message", "reset-players-earned-tokens");
+
         public static final ConfigKey<String> STORAGE_TYPE = new ConfigKey<>("sqlite", ConfigType.SETTINGS, "storage", "type");
 
         public static final ConfigKey<String> MONGODB_URL = new ConfigKey<>("mongodb://localhost:27017", ConfigType.SETTINGS, "storage", "mongodb", "url");
@@ -37,13 +58,36 @@ public final class ConfigKeys {
 
         public static final ConfigKey<String> PREFIX = new ConfigKey<>("&6NecronToken &8»", ConfigType.LANGUAGE, "prefix");
 
+        public static final ConfigKey<String> RELOADED = new ConfigKey<>("&aSuccessfully reloaded.", ConfigType.LANGUAGE, "reloaded");
+
         public static final ConfigKey<String> NO_PERMISSION = new ConfigKey<>("&cYou can't have permission to use this command!", ConfigType.LANGUAGE, "no-perm");
         public static final ConfigKey<String> NO_PLAYER = new ConfigKey<>("&cYou must be a player to use this command!", ConfigType.LANGUAGE, "no-player");
         public static final ConfigKey<String> PLAYER_NOT_FOUND = new ConfigKey<>("&cPlayer not found!", ConfigType.LANGUAGE, "player-not-found");
 
-        public static final ConfigKey<String> RELOADED = new ConfigKey<>("&aSuccessfully reloaded.", ConfigType.LANGUAGE, "reloaded");
-
         public static final ConfigKey<List<String>> HELP_MESSAGE = new ConfigKey<>(ImmutableList.of(), ConfigType.LANGUAGE, "help-message");
+        public static final ConfigKey<List<String>> HELP_ADMIN_MESSAGE = new ConfigKey<>(ImmutableList.of(), ConfigType.LANGUAGE, "help-admin-message");
+
+        public static final ConfigKey<String> TOKEN_MESSAGES_TYPE = new ConfigKey<>("actionbar", ConfigType.LANGUAGE, "token-messages", "type");
+        public static final ConfigKey<String> TOKEN_RECEIVED_MESSAGE = new ConfigKey<>("&aYou received &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-received");
+        public static final ConfigKey<String> TOKEN_SENT_MESSAGE = new ConfigKey<>("&aYou sent &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-sent");
+        public static final ConfigKey<String> TOKEN_VIEW_MESSAGE = new ConfigKey<>("&aYou have &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-view");
+        public static final ConfigKey<String> TOKEN_NOT_ENOUGH_TOKENS_MESSAGE = new ConfigKey<>("&cYou don't have enough tokens!", ConfigType.LANGUAGE, "token-messages", "error-messages", "not-enough-tokens");
+        public static final ConfigKey<String> CANNOT_SEND_TO_YOURSELF_MESSAGE = new ConfigKey<>("&cYou can't send tokens to yourself!", ConfigType.LANGUAGE, "token-messages", "error-messages", "cannot-send-to-yourself");
+        public static final ConfigKey<String> AMOUNT_NOT_VALID_MESSAGE = new ConfigKey<>("&cAmount not valid!", ConfigType.LANGUAGE, "token-messages", "error-messages", "amount-not-valid");
+        public static final ConfigKey<String> ADMIN_TOKEN_ADDED_MESSAGE = new ConfigKey<>("&aAdded &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "admin-messages", "token-added");
+        public static final ConfigKey<String> ADMIN_TOKEN_REMOVED_MESSAGE = new ConfigKey<>("&aRemoved &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "admin-messages", "token-removed");
+        public static final ConfigKey<String> ADMIN_TOKEN_SET_MESSAGE = new ConfigKey<>("&aSet &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "admin-messages", "token-set");
+
+        public static final ConfigKey<String> REWARD_MESSAGES_TYPE = new ConfigKey<>("actionbar", ConfigType.LANGUAGE, "reward-messages", "type");
+        public static final ConfigKey<String> EARNED_TOKENS_FROM_BLOCK_MESSAGE = new ConfigKey<>("&aYou earned &6%amount% &a%token%!", ConfigType.LANGUAGE, "reward-messages", "earned-tokens-from-block");
+        public static final ConfigKey<String> EARNED_TOKENS_FROM_ENTITY_MESSAGE = new ConfigKey<>("&aYou earned &6%amount% &a%token%!", ConfigType.LANGUAGE, "reward-messages", "earned-tokens-from-entity");
+        public static final ConfigKey<String> EARNED_TOKENS_LAST_TIME_MESSAGE = new ConfigKey<>("&aYou earned &6%amount% &a%token%!", ConfigType.LANGUAGE, "reward-messages", "earned-tokens-last-time");
+
+        public static final ConfigKey<String> SHOP_MESSAGES_TYPE = new ConfigKey<>("actionbar", ConfigType.LANGUAGE, "shop-messages", "type");
+        public static final ConfigKey<String> INVENTORY_FULL_MESSAGE = new ConfigKey<>("&cYour inventory is full!", ConfigType.LANGUAGE, "shop-messages", "inventory-full");
+        public static final ConfigKey<String> NOT_ENOUGH_THINGS_MESSAGE = new ConfigKey<>("&cYou don't have enough things!", ConfigType.LANGUAGE, "shop-messages", "not-enough-things");
+        public static final ConfigKey<String> BOUGHT_SHOP_ITEM_MESSAGE = new ConfigKey<>("&aYou bought &6%amount% &a%token%!", ConfigType.LANGUAGE, "shop-messages", "bought-shop-item");
+        public static final ConfigKey<String> SHOPS_HAS_BEEN_REFRESHED_MESSAGE = new ConfigKey<>("&aShops has been refreshed!", ConfigType.LANGUAGE, "shop-messages", "shops-has-been-refreshed");
 
     }
 }

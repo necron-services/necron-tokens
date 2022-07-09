@@ -6,13 +6,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import dev.necron.tokens.common.config.key.ConfigKeys;
 import dev.necron.tokens.common.storage.Storage;
-import dev.necron.tokens.common.token.TokenPlayer;
+import dev.necron.tokens.common.player.TokenPlayer;
 import org.bson.Document;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class MongoStorage implements Storage {
 
@@ -46,13 +44,6 @@ public class MongoStorage implements Storage {
     }
 
     @Override
-    public Collection<TokenPlayer> loadPlayers(Collection<UUID> uuids) {
-        Collection<TokenPlayer> players = new HashSet<>();
-        for (UUID uuid : uuids) loadPlayer(uuid).ifPresent(players::add);
-        return players;
-    }
-
-    @Override
     public void savePlayer(TokenPlayer player) {
         Document document = new Document("_id", player.getUuid().toString());
         document.append("tokens", player.getTokens());
@@ -60,8 +51,24 @@ public class MongoStorage implements Storage {
     }
 
     @Override
-    public void savePlayers(Collection<TokenPlayer> players) {
-        players.forEach(this::savePlayer);
+    public TokenPlayer[] findLeaderboard(int limit) {
+        return CompletableFuture.supplyAsync(() -> {
+            TokenPlayer[] players = new TokenPlayer[limit];
+            Iterator<Document> iterator = collection.find()
+                    .sort(new Document("tokens", -1))
+                    .limit(limit)
+                    .iterator();
+            int i = 0;
+            while (iterator.hasNext()) {
+                Document document = iterator.next();
+                UUID uuid = UUID.fromString(document.getString("_id"));
+                TokenPlayer player = new TokenPlayer(uuid);
+                player.setTokens(document.getLong("tokens"));
+                players[i] = player;
+                i++;
+            }
+            return players;
+        }).join();
     }
 
 }

@@ -4,6 +4,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
+import java.util.List;
+
 public class BukkitListenerAdapter {
 
     public static void register(Plugin plugin, Class<?>... listenerClasses) {
@@ -17,5 +19,18 @@ public class BukkitListenerAdapter {
             e.printStackTrace();
         }
     }
+
+    public static void register(Plugin plugin, List<Class<?>> listenerClasses) {
+        try {
+            PluginManager pluginManager = plugin.getServer().getPluginManager();
+            for (Class<?> listenerClass : listenerClasses) {
+                Listener listener = (Listener) listenerClass.cast(listenerClass.newInstance());
+                pluginManager.registerEvents(listener, plugin);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

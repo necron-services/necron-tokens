@@ -1,7 +1,5 @@
-package dev.necron.tokens.common.drop.handler;
+package dev.necron.tokens.common.drop;
 
-import dev.necron.tokens.common.drop.TokenDrop;
-import dev.necron.tokens.common.drop.TokenDropType;
 import dev.necron.tokens.common.drop.loader.TokenDropLoader;
 
 import java.util.HashMap;
@@ -9,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TokenDropHandler {
+public class TokenDropManager {
 
     private static final Map<TokenDropType, TokenDrop[]> drops = new HashMap<>();
 
@@ -19,7 +17,8 @@ public class TokenDropHandler {
      * @param dropLoader The drop loader
      */
     public static void init(TokenDropLoader dropLoader) {
-        TokenDropHandler.drops.putAll(dropLoader.load());
+        drops.clear();
+        TokenDropManager.drops.putAll(dropLoader.load());
     }
 
     /**
@@ -29,7 +28,7 @@ public class TokenDropHandler {
      * @param executableObject The executable object
      */
     public static void execute(TokenDropType type, UUID playerUUID, Object executableObject) {
-        Optional.ofNullable(TokenDropHandler.drops.get(type)).ifPresent(drops -> {
+        Optional.ofNullable(TokenDropManager.drops.get(type)).ifPresent(drops -> {
             for (TokenDrop drop : drops) drop.execute(playerUUID, executableObject);
         });
     }
@@ -41,7 +40,7 @@ public class TokenDropHandler {
      * @param drops The drops
      */
     public static void register(TokenDropType type, TokenDrop... drops) {
-        TokenDropHandler.drops.put(type, drops);
+        TokenDropManager.drops.put(type, drops);
     }
 
     /**
@@ -50,7 +49,7 @@ public class TokenDropHandler {
      * @param type The type of drops
      */
     public static void unregister(TokenDropType type) {
-        TokenDropHandler.drops.remove(type);
+        TokenDropManager.drops.remove(type);
     }
 
     /**
@@ -66,8 +65,8 @@ public class TokenDropHandler {
             TokenDrop[] newDrops = new TokenDrop[drops.length + 1];
             System.arraycopy(drops, 0, newDrops, 0, drops.length);
             newDrops[drops.length] = drop;
-            TokenDropHandler.drops.put(type, newDrops);
-        } else TokenDropHandler.drops.put(type, new TokenDrop[]{drop});
+            TokenDropManager.drops.put(type, newDrops);
+        } else TokenDropManager.drops.put(type, new TokenDrop[]{drop});
     }
 
     /**
@@ -92,7 +91,7 @@ public class TokenDropHandler {
      * @return The drop
      */
     public static Optional<TokenDrop[]> find(TokenDropType type) {
-        return Optional.ofNullable(TokenDropHandler.drops.get(type));
+        return Optional.ofNullable(TokenDropManager.drops.get(type));
     }
 
 }

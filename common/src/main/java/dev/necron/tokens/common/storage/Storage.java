@@ -1,10 +1,11 @@
 package dev.necron.tokens.common.storage;
 
-import dev.necron.tokens.common.token.TokenPlayer;
+import dev.necron.tokens.common.player.TokenPlayer;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public interface Storage {
 
@@ -29,7 +30,13 @@ public interface Storage {
      * @param uuids the uuids to load
      * @return the loaded TokenPlayers
      */
-    Collection<TokenPlayer> loadPlayers(Collection<UUID> uuids);
+    default Collection<TokenPlayer> loadPlayers(Collection<UUID> uuids) {
+        return uuids.stream()
+                .map(this::loadPlayer)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
+    }
 
     /**
      * save TokenPlayer to storage
@@ -41,6 +48,10 @@ public interface Storage {
      * save TokenPlayers to storage
      * @param players the TokenPlayers to save
      */
-    void savePlayers(Collection<TokenPlayer> players);
+    default void savePlayers(Collection<TokenPlayer> players) {
+        players.forEach(this::savePlayer);
+    }
+
+    TokenPlayer[] findLeaderboard(int limit);
 
 }

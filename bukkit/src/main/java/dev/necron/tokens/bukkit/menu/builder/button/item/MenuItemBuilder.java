@@ -1,4 +1,4 @@
-package dev.necron.tokens.bukkit.menu.button.builder.item;
+package dev.necron.tokens.bukkit.menu.builder.button.item;
 
 import dev.necron.tokens.bukkit.util.item.ItemBuilder;
 import dev.necron.tokens.bukkit.util.item.material.XMaterial;

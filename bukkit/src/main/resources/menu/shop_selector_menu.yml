@@ -3,7 +3,10 @@ menu:
   title: "&a&lShop Selector"
   size: 45
 
-  fill: "GRAY_STAINED_GLASS_PANE"
+  filler:
+    material: "GRAY_STAINED_GLASS_PANE"
+    # '0-44' or '[0, 1, 2]'
+    slot: "0-44"
 
   shop-selector-menu: true
 

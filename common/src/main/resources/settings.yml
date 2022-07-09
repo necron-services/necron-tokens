@@ -1,11 +1,71 @@
+#
+# NECRON TOKENS
+#
+# Author: Kafein
+# Author Discord: 'Kafein#0001'
+# Version: 1.0.0
+# Site: 'necron.dev'
+# Discord: 'https://discord.gg/r67vrXRNG9'
+#
+
 settings:
 
+  # Default: 'en'
   language: "en"
 
+  # Default: 'token.admin'
   admin-perm: "token.admin"
 
+  leaderboard:
+    # Set leaders count
+    # Default: 10
+    max-count: 10
+    # Set leaderboard's regeneration time
+    # Default: 3600 (seconds)
+    regen-time: 3600
+
+  shop:
+    # Default: true
+    stacking-support: true
+    # Default: true
+    close-menu-on-buy: true
+    sounds:
+      # Default: true
+      enabled: true
+      # Default: 'VILLAGER_YES'
+      buy-sound: "VILLAGER_YES"
+      # Default: 'VILLAGER_NO'
+      cannot-buy-sound: "VILLAGER_NO"
+
+  # Set where the player can earn tokens
+  world-blocker:
+    # Default: false
+    enabled: false
+    # Available: "blacklist" or "whitelist"
+    # Default: "blacklist"
+    type: "blacklist"
+    worlds: [ ]
+
+  # Set the sound of the player earns token
+  earn-token-sounds:
+    enabled: true
+    from-entity: "ENTITY_CHICKEN_EGG"
+    from-block: "ENTITY_CHICKEN_EGG"
+
+  # Set the player's how many tokens earned message
+  earned-tokens-message:
+    # Default: true
+    enabled: true
+    # Default: 300
+    timer: 300
+    # Reset tokens when player receives message
+    # Default: true
+    reset-players-earned-tokens: true
+
   storage:
-    #MONGODB - SQLITE - MYSQL - MARIADB - POSTGRESQL
+    # Set the storage type
+    # Available: "MongoDB", "SQLite", "MySQL", "MariaDB", "PostgreSQL"
+    # Default: "SQLITE"
     type: "SQLITE"
     mongodb:
       url: "mongodb://localhost:27017"

@@ -1,7 +1,7 @@
 package dev.necron.tokens.bukkit.drop.type;
 
 import dev.necron.tokens.common.drop.type.BlockTokenDrop;
-import dev.necron.tokens.common.token.TokenPlayerHandler;
+import dev.necron.tokens.common.player.TokenPlayerManager;
 import dev.necron.tokens.common.util.ChanceUtil;
 import dev.necron.tokens.common.util.RandomUtil;
 import org.bukkit.Bukkit;
@@ -24,9 +24,18 @@ public class BukkitBlockTokenDrop extends BlockTokenDrop {
         Block block = (Block) dropper;
         if (block.getType() != getDropper() || block.getData() != getDropperData()) return;
         if (!(ChanceUtil.tryChance(getChance()))) return;
-        long amount = RandomUtil.random(getMinDrop(), getMaxDrop());
-        player.sendMessage("§6You got §e" + amount + " §6tokens!");
-        TokenPlayerHandler.find(player.getUniqueId()).ifPresent(tokenPlayer -> tokenPlayer.giveTokens(amount));
+        long amount = randomDrop();
+        TokenPlayerManager.find(player.getUniqueId()).ifPresent(tokenPlayer -> tokenPlayer.giveTokens(amount));
+    }
+
+    @Override
+    public <T> void execute(UUID playerUUID, T dropper, long amount) {
+        if (!(dropper instanceof Block)) return;
+        Player player = Bukkit.getPlayer(playerUUID);
+        if (player == null) return;
+        Block block = (Block) dropper;
+        if (block.getType() != getDropper() || block.getData() != getDropperData()) return;
+        TokenPlayerManager.find(player.getUniqueId()).ifPresent(tokenPlayer -> tokenPlayer.giveTokens(amount));
     }
 
     @Override
@@ -34,6 +43,11 @@ public class BukkitBlockTokenDrop extends BlockTokenDrop {
         if (!(dropper instanceof Block)) return false;
         Block block = (Block) dropper;
         return block.getType() == getDropper() && block.getData() == getDropperData();
+    }
+
+    @Override
+    public long randomDrop() {
+        return RandomUtil.random(getMinDrop(), getMaxDrop());
     }
 
 }

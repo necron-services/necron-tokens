@@ -1,5 +1,7 @@
-package dev.necron.tokens.common.token;
+package dev.necron.tokens.common.player;
 
+import dev.necron.tokens.common.util.formatter.TokenFormatter;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -7,12 +9,11 @@ import lombok.Setter;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 public class TokenPlayer {
 
     private final UUID uuid;
-    private long tokens;
+    private long tokens, earnedTokens, joinedTimeMillis;
 
     /**
      * Adds the given amount of tokens to the player's tokens.
@@ -21,6 +22,7 @@ public class TokenPlayer {
      */
     public void giveTokens(long tokens) {
         this.tokens += tokens;
+        earnedTokens += tokens;
     }
 
     /**
@@ -28,8 +30,17 @@ public class TokenPlayer {
      *
      * @param tokens The amount of tokens to remove.
      */
-    public void removeTokens(long tokens) {
+    public void takeTokens(long tokens) {
         this.tokens -= tokens;
+    }
+
+    /**
+     * Gets the amount of tokens the player has.
+     *
+     * @return Gets player's tokens formatted
+     */
+    public String getTokensFormatted() {
+        return TokenFormatter.format(tokens);
     }
 
 }

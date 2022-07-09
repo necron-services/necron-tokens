@@ -1,0 +1,76 @@
+language:
+
+  prefix: "&6NecronTokens &8➜"
+
+  reloaded: "%prefix% &aEklenti başarıyla yenilendi."
+
+  no-perm: "%prefix% &cBu komutu kullanmak için yetkin yok."
+  no-player: "%prefix% &cBu komutu kullanmak için oyuncu olmalısın."
+  player-not-found: "%prefix% &cOyuncu bulunamadı."
+
+  help-message:
+    - ""
+    - "  &6&l❘ &e&lNecronTokens"
+    - ""
+    - "  &e&l▪ &7/tokens view <player>"
+    - "   &8➜ &eOyuncunun tokenlerini görüntüle."
+    - ""
+    - "  &e&l▪ &7/tokens pay <player> <amount>"
+    - "   &8➜ &eOyuncuya token gönder."
+    - ""
+
+  help-admin-message:
+    - ""
+    - "  &6&l❘ &e&lNecronTokens"
+    - ""
+    - "  &e&l▪ &7/tokens reload"
+    - "   &8➜ &eEklentiyi yenile."
+    - ""
+    - " &e&l▪ &7/necrontokens refresh-shops"
+    - "  &8➜ &eMarketleri yenile."
+    - ""
+    - "  &e&l▪ &7/necrontokens give <player> <amount>"
+    - "   &8➜ &eOyuncuya token sayısını arttır."
+    - ""
+    - "  &e&l▪ &7/necrontokens take <player> <amount>"
+    - "   &8➜ &eOyuncunun token sayısını azalt."
+    - ""
+    - " &e&l▪ &7/necrontokens set <player> <amount>"
+    - "  &8➜ &eOyuncunun token sayısını değiştir."
+    - ""
+
+  token-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "message"
+    type: "message"
+    token-received: "%prefix% &e%player% &7adlı oyuncu sana &a%amount% &7adet token gönderdi."
+    token-sent: "%prefix% &e%player% &7adlı oyuncuya &a%amount% &7adet token gönderdin."
+    token-view: "%prefix% &e%player% &7oyuncusunun &a%amount% &7tokeni var."
+    error-messages:
+      not-enough-tokens: "%prefix% &cBunun için yeterli tokenin yok."
+      cannot-send-to-self: "%prefix% &cKendine token gönderemezsin."
+      amount-not-valid: "%prefix% &cGeçersiz miktar."
+    admin-messages:
+      token-added: "%prefix% &e%player% &7adlı oyuncuya &a%amount% &7kadar token verdin."
+      token-removed: "%prefix% &e%player% &7adlı oyuncudan &a%amount% &7kadar token azalttın."
+      token-set: "%prefix% &e%player% &7adlı oyuncunun token sayısını &a%amount% &7olarak değiştirdin."
+
+  reward-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "actionbar"
+    type: "actionbar"
+    earned-tokens-from-block: "&d&l%block% &7adlı bloktan &a&l％%chance% &7şans ile &a%amount% &7adet token kazandın."
+    earned-tokens-from-entity: "&d&l%entity% &7adlı varlıktan &a&l％%chance% &7şans ile &a%amount% &7adet token kazandın."
+    earned-tokens-last-time: "&7Son 1 saatte &a%amount% &7adet token kazandın."
+
+  shop-messages:
+    # Set the type of messages
+    # Available: "message", "title", "actionbar"
+    # Default: "message"
+    type: "actionbar"
+    inventory-full: "&cEnvanteriniz dolu."
+    not-enough-things: "&cBunu almak için yeterli şeylerin yok."
+    bought-shop-item: "&e%item% &aeşyasını satın aldın."
+    shops-has-been-refreshed: "&aMarketler yenilendi!"

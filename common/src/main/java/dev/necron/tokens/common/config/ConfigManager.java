@@ -1,8 +1,7 @@
-package dev.necron.tokens.common.config.handler;
+package dev.necron.tokens.common.config;
 
-import dev.necron.tokens.common.config.Config;
 import dev.necron.tokens.common.config.key.ConfigKey;
-import dev.necron.tokens.common.config.ConfigType;
+import dev.necron.tokens.common.config.key.ConfigKeys;
 import dev.necron.tokens.common.config.node.NodeLoader;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +18,34 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Getter
 @SuppressWarnings({"unchecked"})
-public class ConfigHandler {
+public class ConfigManager {
+
+    private static final String DATA_FOLDER = "plugins/NecronTokens";
 
     private static final Map<String, Config> configs = new HashMap<>();
+
+    /**
+     * Loads the default configs.
+     * If the configs already exist, they will be reloaded.
+     */
+    public static void init() {
+        configs.clear();
+
+        ClassLoader classLoader = ConfigManager.class.getClassLoader();
+        ConfigManager.createConfig("settings",
+                "settings.yml",
+                classLoader.getResourceAsStream("settings.yml")).ifPresent(config -> {
+            ConfigManager.put(ConfigType.SETTINGS, config);
+            ConfigManager.putNodesToClass(config, ConfigType.SETTINGS.getClazz(), true);
+        });
+        String language = ConfigKeys.Settings.LANGUAGE.getValue();
+        ConfigManager.createConfig("language",
+                "language/language_" + language + ".yml",
+                classLoader.getResourceAsStream("language/language_" + language + ".yml")).ifPresent(config -> {
+            ConfigManager.put(ConfigType.LANGUAGE, config);
+            ConfigManager.putNodesToClass(config, ConfigType.LANGUAGE.getClazz(), true);
+        });
+    }
 
     /**
      * Put config's nodes into a class's fields
@@ -56,7 +80,7 @@ public class ConfigHandler {
      * @return config
      */
     public static Optional<Config> createConfig(String name, String path, InputStream inputStream) {
-        path = "plugins/NecronTokens/" + path;
+        path = DATA_FOLDER + "/" + path;
         try {
             return Optional.of(new Config(name, path, NodeLoader.load(path, inputStream)));
         } catch (IOException e) {
@@ -73,7 +97,7 @@ public class ConfigHandler {
      * @return config
      */
     public static Optional<Config> createConfig(String name, String path) {
-        path = "plugins/NecronTokens/" + path;
+        path = DATA_FOLDER + "/" + path;
         try {
             return Optional.of(new Config(name, path, NodeLoader.load(path)));
         } catch (IOException e) {

@@ -1,14 +1,14 @@
 package dev.necron.tokens.common.runnable;
 
-import dev.necron.tokens.common.shop.handler.ShopHandler;
+import dev.necron.tokens.common.shop.ShopManager;
 
 public class ShopRefreshRunnable implements Runnable {
 
     @Override
     public void run() {
 
-        ShopHandler.getShops().forEach(shop -> {
-            if (shop.getRefreshTimeLeft() <= 0) {
+        ShopManager.findAll().forEach(shop -> {
+            if (shop.isRefreshable() && shop.getRefreshTimeLeft() <= 0) {
                 shop.refresh();
             }
         });

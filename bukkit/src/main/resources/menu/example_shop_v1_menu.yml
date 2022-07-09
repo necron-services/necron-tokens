@@ -3,13 +3,18 @@ menu:
   title: "&a&lExample Shop V1"
   size: 45
 
-  fill: "GRAY_STAINED_GLASS_PANE"
+  filler:
+    material: "GRAY_STAINED_GLASS_PANE"
+    # '0-44' or '[0, 1, 2]'
+    slot: "0-44"
 
   shop: "ExampleShopV1"
+  permission: "example.shop.v1"
 
   items:
 
     example-shop-item-v1:
+      preview-chance: 50
       shop-item: "ExampleShopItemV1"
       slot: 5
       material: "DIAMOND"

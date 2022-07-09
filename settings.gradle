@@ -1,3 +1,9 @@
 rootProject.name = 'necron-tokens'
 include 'common'
 include 'bukkit'
+include 'worldguard'
+include 'worldguard:WG6'
+findProject(':worldguard:WG6')?.name = 'WG6'
+include 'worldguard:WG7'
+findProject(':worldguard:WG7')?.name = 'WG7'
+
