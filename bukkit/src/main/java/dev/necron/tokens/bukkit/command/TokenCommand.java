@@ -111,7 +111,7 @@ public class TokenCommand implements HCommandAdapter {
                     TokenPlayerManager.get(target.getUniqueId()).giveTokens(receiveEvent.getAmount());
 
                     Message message = tokenMessages.TOKEN_RECEIVED;
-                    message.execute(player, () -> LanguageUtil.replace(message.getValue(),
+                    message.execute(target, () -> LanguageUtil.replace(message.getValue(),
                             new String[]{"%player%", "%amount%"},
                             new String[]{player.getName(), TokenFormatter.format(receiveEvent.getAmount())}
                     ));

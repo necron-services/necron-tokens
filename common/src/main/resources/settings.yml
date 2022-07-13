@@ -49,8 +49,8 @@ settings:
   # Set the sound of the player earns token
   earn-token-sounds:
     enabled: true
-    from-entity: "ENTITY_CHICKEN_EGG"
-    from-block: "ENTITY_CHICKEN_EGG"
+    from-entity: "ORB_PICKUP"
+    from-block: "ORB_PICKUP"
 
   # Set the player's how many tokens earned message
   earned-tokens-message:

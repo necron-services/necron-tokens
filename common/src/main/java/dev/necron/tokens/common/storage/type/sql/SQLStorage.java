@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -102,6 +103,22 @@ public class SQLStorage implements Storage {
                 e.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void savePlayers(Collection<TokenPlayer> players) {
+        try {
+            Connection connection = this.connection.getConnection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE token_user SET tokens = ? WHERE uuid = ?;");
+            for (TokenPlayer player : players) {
+                statement.setLong(1, player.getTokens());
+                statement.setString(2, player.getUuid().toString());
+                statement.executeUpdate();
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

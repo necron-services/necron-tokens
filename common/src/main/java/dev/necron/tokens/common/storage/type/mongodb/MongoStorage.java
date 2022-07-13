@@ -30,24 +30,27 @@ public class MongoStorage implements Storage {
 
     @Override
     public Optional<TokenPlayer> loadPlayer(UUID uuid) {
-        Document document = new Document("_id", uuid.toString());
-        Document result = collection.find(document).first();
-        if (result == null) {
-            document.append("tokens", 0);
-            collection.insertOne(document);
-            return Optional.empty();
-        }else {
+        return CompletableFuture.supplyAsync(() -> {
             TokenPlayer player = new TokenPlayer(uuid);
-            player.setTokens(result.get("tokens", Number.class).longValue());
+            Document document = new Document("_id", uuid.toString());
+            Document result = collection.find(document).first();
+            if (result == null) {
+                document.append("tokens", 0);
+                collection.insertOne(document);
+            }else {
+                player.setTokens(result.get("tokens", Number.class).longValue());
+            }
             return Optional.of(player);
-        }
+        }).join();
     }
 
     @Override
     public void savePlayer(TokenPlayer player) {
-        Document document = new Document("_id", player.getUuid().toString());
-        document.append("tokens", player.getTokens());
-        collection.updateOne(new Document("_id", player.getUuid().toString()), new Document("$set", document));
+        CompletableFuture.runAsync(() -> {
+            Document document = new Document("_id", player.getUuid().toString());
+            document.append("tokens", player.getTokens());
+            collection.updateOne(new Document("_id", player.getUuid().toString()), new Document("$set", document));
+        });
     }
 
     @Override

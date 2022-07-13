@@ -7,6 +7,8 @@ import dev.necron.tokens.common.player.TokenPlayerManager;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.concurrent.CompletableFuture;
+
 public final class StorageProvider {
 
     @Getter
@@ -36,10 +38,10 @@ public final class StorageProvider {
      * shutdowns the storage
      */
     public static void shutdown() {
-        if (storage != null) {
-            storage.savePlayers(TokenPlayerManager.findAll());
-            storage.shutdown();
-        }
+        if (storage == null) return;
+
+        storage.savePlayers(TokenPlayerManager.findAll());
+        storage.shutdown();
     }
 
     /**
