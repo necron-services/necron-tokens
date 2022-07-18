@@ -16,6 +16,13 @@ settings:
   # Default: 'token.admin'
   admin-perm: "token.admin"
 
+  # Auto save the data of players who are in the game
+  auto-save-users:
+    # Default: true
+    enabled: true
+    # Default: '600'
+    interval: 600
+
   leaderboard:
     # Set leaders count
     # Default: 10
@@ -25,8 +32,6 @@ settings:
     regen-time: 3600
 
   shop:
-    # Default: true
-    stacking-support: true
     # Default: true
     close-menu-on-buy: true
     sounds:

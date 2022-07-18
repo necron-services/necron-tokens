@@ -29,7 +29,7 @@ import org.bukkit.plugin.PluginManager;
 @BaseCommand(
         name = "necrontokens",
         description = "Tokens admin command",
-        aliases = {"necrontokens", "tokensplugin", "tokenplugin"}
+        aliases = {"necrontokens", "tokensplugin", "tokenplugin", "tokensadmin", "tokenadmin"}
 )
 public class TokenAdminCommand implements HCommandAdapter {
 

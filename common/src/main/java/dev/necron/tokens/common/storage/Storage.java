@@ -34,6 +34,6 @@ public interface Storage {
         players.forEach(this::savePlayer);
     }
 
-    TokenPlayer[] findLeaderboard(int limit);
+    TokenPlayer[] findLeaders(int limit);
 
 }

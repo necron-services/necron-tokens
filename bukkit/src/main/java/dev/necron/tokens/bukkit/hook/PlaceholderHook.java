@@ -5,9 +5,8 @@ import dev.necron.tokens.common.leaderboard.leader.Leader;
 import dev.necron.tokens.common.player.TokenPlayer;
 import dev.necron.tokens.common.player.TokenPlayerManager;
 import dev.necron.tokens.common.util.formatter.TokenFormatter;
-import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,14 +14,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 public class PlaceholderHook extends PlaceholderExpansion {
 
     private final Plugin plugin;
 
+    public PlaceholderHook(Plugin plugin) {
+        this.plugin = plugin;
+        register();
+    }
+
     @Override
     public @NotNull String getIdentifier() {
-        return "tokenplugin";
+        return "NecronTokens";
     }
 
     @Override
@@ -36,8 +39,12 @@ public class PlaceholderHook extends PlaceholderExpansion {
     }
 
     @Override
-    public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
+    public boolean persist() {
+        return true;
+    }
 
+    @Override
+    public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
         if (params.equalsIgnoreCase("tokens")) {
             UUID playerUUID = player.getUniqueId();
             Optional<TokenPlayer> optionalTokenPlayer = TokenPlayerManager.find(playerUUID);
@@ -62,13 +69,13 @@ public class PlaceholderHook extends PlaceholderExpansion {
             Optional<Leader> optionalLeader = Leaderboard.find(leaderLine);
             if (optionalLeader.isPresent()) {
                 Leader leader = optionalLeader.get();
-                if (type.equalsIgnoreCase("name")) return leader.getName();
-                if (type.equalsIgnoreCase("tokens")) return TokenFormatter.format(leader.getTokens());
+                return type.equalsIgnoreCase("name")
+                        ? leader.getName()
+                        : TokenFormatter.format(leader.getTokens());
             }
             return type.equalsIgnoreCase("name") ? "N/A" : "0";
         }
-
-        return super.onRequest(player, params);
+        return super.onPlaceholderRequest(player, params);
     }
 
 }

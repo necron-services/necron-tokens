@@ -7,7 +7,6 @@ public class MenuRefreshRunnable implements Runnable {
 
     @Override
     public void run() {
-
         MenuManager.findAllMenu().forEach(menu -> {
             menu.getMenuButtonMap().forEach((slot, buttons) -> {
                 for (MenuButton button : buttons) {
@@ -16,7 +15,6 @@ public class MenuRefreshRunnable implements Runnable {
                 }
             });
         });
-
     }
 
 }

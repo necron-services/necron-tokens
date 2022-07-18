@@ -104,7 +104,7 @@ public class ShopItem {
      * @return true if the item has stock, false otherwise
      */
     public boolean hasStock() {
-        return stock > 0;
+        return maxStock <= 0 || stock > 0;
     }
 
 }

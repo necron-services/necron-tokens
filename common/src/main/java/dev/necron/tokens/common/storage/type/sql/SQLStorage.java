@@ -122,7 +122,7 @@ public class SQLStorage implements Storage {
     }
 
     @Override
-    public TokenPlayer[] findLeaderboard(int limit) {
+    public TokenPlayer[] findLeaders(int limit) {
         return CompletableFuture.supplyAsync(() -> {
             TokenPlayer[] players = new TokenPlayer[limit];
             try {
@@ -132,8 +132,9 @@ public class SQLStorage implements Storage {
                 ResultSet resultSet = statement.executeQuery();
                 int i = 0;
                 while (resultSet.next()) {
-                    TokenPlayer player = new TokenPlayer(UUID.fromString(resultSet.getString("uuid")));
-                    player.setTokens(resultSet.getInt("tokens"));
+                    UUID uuid = UUID.fromString(resultSet.getString("uuid"));
+                    TokenPlayer player = new TokenPlayer(uuid);
+                    player.setTokens(resultSet.getLong("tokens"));
                     players[i] = player;
                     i++;
                 }

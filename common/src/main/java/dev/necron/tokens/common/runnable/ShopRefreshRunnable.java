@@ -6,13 +6,11 @@ public class ShopRefreshRunnable implements Runnable {
 
     @Override
     public void run() {
-
         ShopManager.findAll().forEach(shop -> {
             if (shop.isRefreshable() && shop.getRefreshTimeLeft() <= 0) {
                 shop.refresh();
             }
         });
-
     }
 
 }

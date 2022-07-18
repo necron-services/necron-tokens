@@ -54,7 +54,7 @@ public class MongoStorage implements Storage {
     }
 
     @Override
-    public TokenPlayer[] findLeaderboard(int limit) {
+    public TokenPlayer[] findLeaders(int limit) {
         return CompletableFuture.supplyAsync(() -> {
             TokenPlayer[] players = new TokenPlayer[limit];
             Iterator<Document> iterator = collection.find()

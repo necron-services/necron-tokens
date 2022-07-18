@@ -17,10 +17,12 @@ public final class ConfigKeys {
 
         public static final ConfigKey<String> ADMIN_PERM = new ConfigKey<>("token.admin", ConfigType.SETTINGS, "admin-perm");
 
-        public static final ConfigKey<Integer> LEADERBOARD_LIMIT = new ConfigKey<>(10, ConfigType.SETTINGS, "leaderboard", "limit");
+        public static final ConfigKey<Boolean> AUTO_SAVE_USERS_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "auto-save-users", "enabled");
+        public static final ConfigKey<Integer> AUTO_SAVE_USERS_INTERVAL = new ConfigKey<>(60, ConfigType.SETTINGS, "auto-save-users", "interval");
+
+        public static final ConfigKey<Integer> LEADERBOARD_MAX_COUNT = new ConfigKey<>(10, ConfigType.SETTINGS, "leaderboard", "max-count");
         public static final ConfigKey<Integer> LEADERBOARD_REGEN_TIME = new ConfigKey<>(60, ConfigType.SETTINGS, "leaderboard", "regen-time");
 
-        public static final ConfigKey<Boolean> SHOP_STACKING_SUPPORT = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "stacking-support");
         public static final ConfigKey<Boolean> SHOP_CLOSE_MENU_ON_BUY = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "close-menu-on-buy");
         public static final ConfigKey<Boolean> SHOP_SOUNDS_ENABLED = new ConfigKey<>(true, ConfigType.SETTINGS, "shop", "sounds", "enabled");
         public static final ConfigKey<String> SHOP_BUY_SOUND = new ConfigKey<>("", ConfigType.SETTINGS, "shop", "sounds", "buy-sound");
@@ -66,6 +68,8 @@ public final class ConfigKeys {
 
         public static final ConfigKey<List<String>> HELP_MESSAGE = new ConfigKey<>(ImmutableList.of(), ConfigType.LANGUAGE, "help-message");
         public static final ConfigKey<List<String>> HELP_ADMIN_MESSAGE = new ConfigKey<>(ImmutableList.of(), ConfigType.LANGUAGE, "help-admin-message");
+
+        public static final ConfigKey<List<String>> AUTO_SAVE_MESSAGE = new ConfigKey<>(ImmutableList.of(), ConfigType.LANGUAGE, "auto-save-message");
 
         public static final ConfigKey<String> TOKEN_MESSAGES_TYPE = new ConfigKey<>("actionbar", ConfigType.LANGUAGE, "token-messages", "type");
         public static final ConfigKey<String> TOKEN_RECEIVED_MESSAGE = new ConfigKey<>("&aYou received &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-received");

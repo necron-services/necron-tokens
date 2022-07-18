@@ -39,6 +39,12 @@ language:
     - "  &8➜ &eSet the player's tokens."
     - ""
 
+  auto-save-message:
+    - ""
+    - "  &6&l❘ &e&lNecronTokens"
+    - "  &8➜ &eData of &a%count% &eplayers has been saved."
+    - ""
+
   token-messages:
     # Set the type of messages
     # Available: "message", "title", "actionbar"

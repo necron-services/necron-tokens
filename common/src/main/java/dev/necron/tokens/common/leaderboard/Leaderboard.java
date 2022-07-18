@@ -24,16 +24,19 @@ public class Leaderboard {
     public static void reload() {
         Storage storage = StorageProvider.getStorage();
 
-        int limit = ConfigKeys.Settings.LEADERBOARD_LIMIT.getValue();
-        TokenPlayer[] tokenPlayers = storage.findLeaderboard(limit);
+        int maxCount = ConfigKeys.Settings.LEADERBOARD_MAX_COUNT.getValue();
+        TokenPlayer[] tokenPlayers = storage.findLeaders(maxCount);
+
         leaders = new Leader[tokenPlayers.length];
         for (int i = 0; i < tokenPlayers.length; i++) {
             TokenPlayer tokenPlayer = tokenPlayers[i];
-            if (tokenPlayer == null) continue;
+            if (tokenPlayer == null) break;
             UUID playerUUID = tokenPlayer.getUuid();
-            String name = leaderFinder.find(playerUUID);
-            long tokens = tokenPlayer.getTokens();
-            leaders[i] = new Leader(playerUUID, name, tokens);
+            leaders[i] = new Leader(
+                    playerUUID,
+                    leaderFinder.find(playerUUID),
+                    tokenPlayer.getTokens()
+            );
         }
 
         regenTime = System.currentTimeMillis() + (ConfigKeys.Settings.LEADERBOARD_REGEN_TIME.getValue() * 1000);
@@ -49,7 +52,7 @@ public class Leaderboard {
     }
 
     public static long getRegenTime() {
-        return (System.currentTimeMillis() - regenTime) / 1000;
+        return (regenTime - System.currentTimeMillis()) / 1000;
     }
 
 }

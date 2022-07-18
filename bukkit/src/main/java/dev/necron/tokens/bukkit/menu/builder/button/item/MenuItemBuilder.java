@@ -25,11 +25,29 @@ public class MenuItemBuilder {
     }
 
     public static MenuItemBuilder of(ConfigurationNode node, String[] targets, String[] replacements) {
-        return new MenuItemBuilder(node).name(targets, replacements).lore(targets, replacements).enchantments().glow().head();
+        return new MenuItemBuilder(node)
+                .amount()
+                .name(targets, replacements)
+                .lore(targets, replacements)
+                .enchantments()
+                .glow()
+                .head();
     }
 
     public static MenuItemBuilder of(ConfigurationNode node) {
-        return new MenuItemBuilder(node).name().lore().enchantments().glow().head();
+        return new MenuItemBuilder(node)
+                .amount()
+                .name()
+                .lore()
+                .enchantments()
+                .glow()
+                .head();
+    }
+
+    public MenuItemBuilder amount() {
+        if ((node.getNode("amount").isEmpty())) return this;
+        itemBuilder.setAmount(node.getNode("amount").getInt());
+        return this;
     }
 
     public MenuItemBuilder name() {

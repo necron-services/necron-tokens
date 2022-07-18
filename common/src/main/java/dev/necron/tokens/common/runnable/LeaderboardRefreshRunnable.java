@@ -6,12 +6,10 @@ public class LeaderboardRefreshRunnable implements Runnable{
 
     @Override
     public void run() {
-
         long timeLeft = Leaderboard.getRegenTime();
         if (timeLeft <= 0) {
             Leaderboard.reload();
         }
-
     }
 
 }

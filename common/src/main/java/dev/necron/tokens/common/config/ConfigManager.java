@@ -2,6 +2,7 @@ package dev.necron.tokens.common.config;
 
 import dev.necron.tokens.common.config.key.ConfigKey;
 import dev.necron.tokens.common.config.key.ConfigKeys;
+import dev.necron.tokens.common.config.language.Language;
 import dev.necron.tokens.common.config.node.NodeLoader;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +39,19 @@ public class ConfigManager {
             ConfigManager.put(ConfigType.SETTINGS, config);
             ConfigManager.putNodesToClass(config, ConfigType.SETTINGS.getClazz(), true);
         });
-        String language = ConfigKeys.Settings.LANGUAGE.getValue();
-        ConfigManager.createConfig("language",
-                "language/language_" + language + ".yml",
-                classLoader.getResourceAsStream("language/language_" + language + ".yml")).ifPresent(config -> {
-            ConfigManager.put(ConfigType.LANGUAGE, config);
-            ConfigManager.putNodesToClass(config, ConfigType.LANGUAGE.getClazz(), true);
-        });
+
+        String selectedLanguage = ConfigKeys.Settings.LANGUAGE.getValue();
+        for (Language language : Language.values()) {
+            String languageName = language.name().toLowerCase(Locale.ROOT);
+            ConfigManager.createConfig("language",
+                    "language/language_" + languageName + ".yml",
+                    classLoader.getResourceAsStream("language/language_" + languageName + ".yml")).ifPresent(config -> {
+                if (languageName.equalsIgnoreCase(selectedLanguage)) {
+                    ConfigManager.put(ConfigType.LANGUAGE, config);
+                    ConfigManager.putNodesToClass(config, ConfigType.LANGUAGE.getClazz(), true);
+                }
+            });
+        }
     }
 
     /**
