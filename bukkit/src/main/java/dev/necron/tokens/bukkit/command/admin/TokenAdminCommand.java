@@ -26,6 +26,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @BaseCommand(
         name = "necrontokens",
         description = "Tokens admin command",
@@ -71,6 +74,42 @@ public class TokenAdminCommand implements HCommandAdapter {
             Message message = shopMessages.SHOPS_HAS_BEEN_REFRESHED;
             message.execute((Player) sender,
                     () -> LanguageUtil.replace(message.getValue())
+            );
+        }
+    }
+
+    @SubCommand(
+            args = "refresh-shop"
+    )
+    public void refreshShopCommand(CommandSender sender, String[] args) {
+        if (!hasPermission(sender)) return;
+        if (args.length < 2) {
+            sender.sendMessage("/necrontokens refresh-shop <shop-name>");
+            return;
+        }
+
+        String shopName = args[1];
+        Optional<Shop> optionalShop = ShopManager.find(shopName);
+        if (!optionalShop.isPresent()) {
+            sender.sendMessage("§cShop not found");
+            sender.sendMessage("§7Available shops: §a" +
+                    ShopManager.findAll().stream()
+                            .map(Shop::getName)
+                            .collect(Collectors.toSet())
+            );
+            return;
+        }
+
+        Shop shop = optionalShop.get();
+        shop.refresh();
+        if (sender instanceof Player) {
+            ShopMessages shopMessages = (ShopMessages) MessageCategories.SHOP_MESSAGES.getInstance();
+            Message message = shopMessages.SHOP_HAS_BEEN_REFRESHED;
+            message.execute((Player) sender,
+                    () -> LanguageUtil.replace(message.getValue(),
+                            new String[]{"%shop%"},
+                            new String[]{args[1]}
+                    )
             );
         }
     }

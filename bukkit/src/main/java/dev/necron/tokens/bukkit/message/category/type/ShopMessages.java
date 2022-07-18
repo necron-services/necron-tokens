@@ -29,6 +29,11 @@ public final class ShopMessages extends MessageCategory {
             this
     );
 
+    public final Message SHOP_HAS_BEEN_REFRESHED = Message.of(
+            ConfigKeys.Language.SHOP_HAS_BEEN_REFRESHED_MESSAGE.getValue(),
+            this
+    );
+
     public final Message SHOPS_HAS_BEEN_REFRESHED = Message.of(
             ConfigKeys.Language.SHOPS_HAS_BEEN_REFRESHED_MESSAGE.getValue(),
             this

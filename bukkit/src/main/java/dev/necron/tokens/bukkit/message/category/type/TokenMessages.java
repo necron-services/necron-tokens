@@ -24,8 +24,8 @@ public final class TokenMessages extends MessageCategory {
             this
     );
 
-    public final Message TOKEN_VIEW = Message.of(
-            ConfigKeys.Language.TOKEN_VIEW_MESSAGE.getValue(),
+    public final Message TOKEN_SHOW = Message.of(
+            ConfigKeys.Language.TOKEN_SHOW_MESSAGE.getValue(),
             this
     );
 

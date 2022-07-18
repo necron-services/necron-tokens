@@ -36,9 +36,9 @@ public class TokenCommand implements HCommandAdapter {
     }
 
     @SubCommand(
-            args = "view"
+            args = "show"
     )
-    public void viewCommand(CommandSender sender, String[] args) {
+    public void showCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(LanguageUtil.replace(ConfigKeys.Language.NO_PLAYER.getValue()));
             return;
@@ -56,7 +56,7 @@ public class TokenCommand implements HCommandAdapter {
         TokenPlayer tokenPlayer = TokenPlayerManager.get(target.getUniqueId());
 
         TokenMessages tokenMessages = (TokenMessages) MessageCategories.TOKEN_MESSAGES.getInstance();
-        Message message = tokenMessages.TOKEN_VIEW;
+        Message message = tokenMessages.TOKEN_SHOW;
         message.execute(player, () -> LanguageUtil.replace(message.getValue(),
                 new String[]{"%player%", "%amount%"},
                 new String[]{target.getName(), tokenPlayer.getTokensFormatted()}

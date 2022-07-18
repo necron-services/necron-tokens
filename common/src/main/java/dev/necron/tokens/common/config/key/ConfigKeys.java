@@ -74,7 +74,7 @@ public final class ConfigKeys {
         public static final ConfigKey<String> TOKEN_MESSAGES_TYPE = new ConfigKey<>("actionbar", ConfigType.LANGUAGE, "token-messages", "type");
         public static final ConfigKey<String> TOKEN_RECEIVED_MESSAGE = new ConfigKey<>("&aYou received &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-received");
         public static final ConfigKey<String> TOKEN_SENT_MESSAGE = new ConfigKey<>("&aYou sent &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-sent");
-        public static final ConfigKey<String> TOKEN_VIEW_MESSAGE = new ConfigKey<>("&aYou have &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-view");
+        public static final ConfigKey<String> TOKEN_SHOW_MESSAGE = new ConfigKey<>("&aYou have &6%amount% &a%token%!", ConfigType.LANGUAGE, "token-messages", "token-show");
         public static final ConfigKey<String> TOKEN_NOT_ENOUGH_TOKENS_MESSAGE = new ConfigKey<>("&cYou don't have enough tokens!", ConfigType.LANGUAGE, "token-messages", "error-messages", "not-enough-tokens");
         public static final ConfigKey<String> CANNOT_SEND_TO_YOURSELF_MESSAGE = new ConfigKey<>("&cYou can't send tokens to yourself!", ConfigType.LANGUAGE, "token-messages", "error-messages", "cannot-send-to-yourself");
         public static final ConfigKey<String> AMOUNT_NOT_VALID_MESSAGE = new ConfigKey<>("&cAmount not valid!", ConfigType.LANGUAGE, "token-messages", "error-messages", "amount-not-valid");
@@ -91,6 +91,7 @@ public final class ConfigKeys {
         public static final ConfigKey<String> INVENTORY_FULL_MESSAGE = new ConfigKey<>("&cYour inventory is full!", ConfigType.LANGUAGE, "shop-messages", "inventory-full");
         public static final ConfigKey<String> NOT_ENOUGH_THINGS_MESSAGE = new ConfigKey<>("&cYou don't have enough things!", ConfigType.LANGUAGE, "shop-messages", "not-enough-things");
         public static final ConfigKey<String> BOUGHT_SHOP_ITEM_MESSAGE = new ConfigKey<>("&aYou bought &6%amount% &a%token%!", ConfigType.LANGUAGE, "shop-messages", "bought-shop-item");
+        public static final ConfigKey<String> SHOP_HAS_BEEN_REFRESHED_MESSAGE = new ConfigKey<>("&aShop has been refreshed!", ConfigType.LANGUAGE, "shop-messages", "shop-has-been-refreshed");
         public static final ConfigKey<String> SHOPS_HAS_BEEN_REFRESHED_MESSAGE = new ConfigKey<>("&aShops has been refreshed!", ConfigType.LANGUAGE, "shop-messages", "shops-has-been-refreshed");
 
     }
