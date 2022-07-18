@@ -1,5 +1,6 @@
 package dev.necron.tokens.bukkit.shop.item.value.type;
 
+import dev.necron.tokens.common.shop.item.ShopItem;
 import dev.necron.tokens.common.shop.item.value.ShopValue;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
@@ -13,7 +14,7 @@ public class CommandShopValue implements ShopValue {
     private final String command;
 
     @Override
-    public void execute(UUID playerUUID) {
+    public void execute(ShopItem shopItem, UUID playerUUID) {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null) return;
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", player.getName()));

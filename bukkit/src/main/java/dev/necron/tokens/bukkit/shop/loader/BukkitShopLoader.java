@@ -85,11 +85,15 @@ public class BukkitShopLoader implements ShopLoader {
             }
             switch (type) {
                 case COMMAND:
-                    shopItem.putValue(name, new CommandShopValue(value.getNode("command").getString()));
+                    String command = value.getNode("command").getString();
+                    shopItem.putValue(name, new CommandShopValue(command));
                     break;
                 case ITEM:
                     MenuItemBuilder menuItemBuilder = MenuItemBuilder.of(value.getNode("item"));
-                    ItemShopValue itemShopValue = new ItemShopValue(menuItemBuilder.build());
+                    ItemShopValue itemShopValue = new ItemShopValue(
+                            menuItemBuilder.build(),
+                            value.getNode("apply-amount-to-stock").getBoolean()
+                    );
                     shopItem.putValue(name, itemShopValue);
                     break;
             }

@@ -53,7 +53,7 @@ public class ShopItem {
      */
     public void execute(UUID playerUUID) {
         for (ShopValue shopValue : shopValues.values()) {
-            shopValue.execute(playerUUID);
+            shopValue.execute(this, playerUUID);
         }
     }
 

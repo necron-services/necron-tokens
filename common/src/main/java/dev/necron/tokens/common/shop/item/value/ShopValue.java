@@ -1,5 +1,7 @@
 package dev.necron.tokens.common.shop.item.value;
 
+import dev.necron.tokens.common.shop.item.ShopItem;
+
 import java.util.UUID;
 
 public interface ShopValue {
@@ -9,6 +11,6 @@ public interface ShopValue {
      *
      * @param playerUUID the player uuid to execute the shop item
      */
-    void execute(UUID playerUUID);
+    void execute(ShopItem shopItem, UUID playerUUID);
 
 }
